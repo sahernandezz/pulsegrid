@@ -176,7 +176,7 @@ banner. It is replaced by real measurements when the runner is run.
 
 ## Author
 
-**Sergio Alejandro Hernández Zambrano** — *Sergio Hernández* · Backend Software Engineer (Bogotá, Colombia).
+**Sergio Alejandro Hernandez Zambrano** — *Sergio Hernandez* · Backend Software Engineer (Bogotá, Colombia).
 
 - 🌐 Portfolio — [sahernandezz.web.app](https://sahernandezz.web.app)
 - 💼 LinkedIn — [in/sergio-alejandro-hernandez-zambrano](https://www.linkedin.com/in/sergio-alejandro-hernandez-zambrano)
@@ -184,4 +184,4 @@ banner. It is replaced by real measurements when the runner is run.
 
 ## License
 
-MIT © Sergio Alejandro Hernández Zambrano — see [LICENSE](LICENSE).
+MIT © Sergio Alejandro Hernandez Zambrano — see [LICENSE](LICENSE).

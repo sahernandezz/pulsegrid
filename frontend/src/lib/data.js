@@ -6,8 +6,8 @@ export const REPO_URL = 'https://github.com/sahernandezz/pulsegrid';
 
 // Project author / creator — links the showcase back to its author.
 export const AUTHOR = {
-  name: 'Sergio Hernández',
-  fullName: 'Sergio Alejandro Hernández Zambrano',
+  name: 'Sergio Hernandez',
+  fullName: 'Sergio Alejandro Hernandez Zambrano',
   role: 'Backend Software Engineer',
   portfolio: 'https://sahernandezz.web.app',
   linkedin: 'https://www.linkedin.com/in/sergio-alejandro-hernandez-zambrano',

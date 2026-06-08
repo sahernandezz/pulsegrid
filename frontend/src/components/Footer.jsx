@@ -36,13 +36,13 @@ export default function Footer() {
             <span>{t('footer.source')}</span>
           </a>
           <a href={AUTHOR.linkedin} target="_blank" rel="noreferrer author"
-             aria-label="LinkedIn — Sergio Hernández"
+             aria-label="LinkedIn — Sergio Hernandez"
              className="tag transition-colors hover:border-line-strong hover:text-fg">
             <LinkedIn width={13} height={13} />
             <span>LinkedIn</span>
           </a>
           <a href={AUTHOR.portfolio} target="_blank" rel="noreferrer author"
-             aria-label="Portfolio — Sergio Hernández"
+             aria-label="Portfolio — Sergio Hernandez"
              className="tag transition-colors hover:border-line-strong hover:text-fg">
             <ExternalLink width={13} height={13} />
             <span>{t('footer.portfolio')}</span>

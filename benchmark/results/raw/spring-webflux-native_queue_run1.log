@@ -1,0 +1,79 @@
+
+         /\      Grafana   /‾‾/  
+    /\  /  \     |\  __   /  /   
+   /  \/    \    | |/ /  /   ‾‾\ 
+  /          \   |   (  |  (‾)  |
+ / __________ \  |_|\_\  \_____/ 
+
+
+     execution: local
+        script: /Users/sergio/IdeaProjects/pulsegrid/runner/k6/ingest.js
+        output: -
+
+     scenarios: (100.00%) 1 scenario, 150 max VUs, 50s max duration (incl. graceful stop):
+              * steady: 150 looping VUs for 20s (gracefulStop: 30s)
+
+
+running (01.0s), 150/150 VUs, 5686 complete and 0 interrupted iterations
+steady   [   5% ] 150 VUs  01.0s/20s
+
+running (02.0s), 150/150 VUs, 12115 complete and 0 interrupted iterations
+steady   [  10% ] 150 VUs  02.0s/20s
+
+running (03.0s), 150/150 VUs, 17514 complete and 0 interrupted iterations
+steady   [  15% ] 150 VUs  03.0s/20s
+
+running (04.0s), 150/150 VUs, 24054 complete and 0 interrupted iterations
+steady   [  20% ] 150 VUs  04.0s/20s
+
+running (05.0s), 150/150 VUs, 30525 complete and 0 interrupted iterations
+steady   [  25% ] 150 VUs  05.0s/20s
+
+running (06.0s), 150/150 VUs, 37102 complete and 0 interrupted iterations
+steady   [  30% ] 150 VUs  06.0s/20s
+
+running (07.0s), 150/150 VUs, 42646 complete and 0 interrupted iterations
+steady   [  35% ] 150 VUs  07.0s/20s
+
+running (08.0s), 150/150 VUs, 49018 complete and 0 interrupted iterations
+steady   [  40% ] 150 VUs  08.0s/20s
+
+running (09.0s), 150/150 VUs, 55467 complete and 0 interrupted iterations
+steady   [  45% ] 150 VUs  09.0s/20s
+
+running (10.0s), 150/150 VUs, 62064 complete and 0 interrupted iterations
+steady   [  50% ] 150 VUs  10.0s/20s
+
+running (11.0s), 150/150 VUs, 67641 complete and 0 interrupted iterations
+steady   [  55% ] 150 VUs  11.0s/20s
+
+running (12.0s), 150/150 VUs, 74200 complete and 0 interrupted iterations
+steady   [  60% ] 150 VUs  12.0s/20s
+
+running (13.0s), 150/150 VUs, 80604 complete and 0 interrupted iterations
+steady   [  65% ] 150 VUs  13.0s/20s
+
+running (14.0s), 150/150 VUs, 87025 complete and 0 interrupted iterations
+steady   [  70% ] 150 VUs  14.0s/20s
+
+running (15.0s), 150/150 VUs, 92652 complete and 0 interrupted iterations
+steady   [  75% ] 150 VUs  15.0s/20s
+
+running (16.0s), 150/150 VUs, 99119 complete and 0 interrupted iterations
+steady   [  80% ] 150 VUs  16.0s/20s
+
+running (17.0s), 150/150 VUs, 105633 complete and 0 interrupted iterations
+steady   [  85% ] 150 VUs  17.0s/20s
+
+running (18.0s), 150/150 VUs, 111827 complete and 0 interrupted iterations
+steady   [  90% ] 150 VUs  18.0s/20s
+
+running (19.0s), 150/150 VUs, 117596 complete and 0 interrupted iterations
+steady   [  95% ] 150 VUs  19.0s/20s
+
+running (20.0s), 150/150 VUs, 124111 complete and 0 interrupted iterations
+steady   [ 100% ] 150 VUs  20.0s/20s
+PulseGrid k6 [queue] vus=150 rps=6210 p99=51.1ms err=95.03%
+
+running (20.0s), 000/150 VUs, 124340 complete and 0 interrupted iterations
+steady ✓ [ 100% ] 150 VUs  20s

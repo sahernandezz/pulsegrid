@@ -1,0 +1,206 @@
+ Image pulsegrid/quarkus-reactive-native Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 709B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile.native
+#2 transferring dockerfile: 1.93kB done
+#2 DONE 0.0s
+
+#3 resolve image config for docker-image://docker.io/docker/dockerfile:1.7
+#3 DONE 0.9s
+
+#4 docker-image://docker.io/docker/dockerfile:1.7@sha256:a57df69d0ea827fb7266491f2813635de6f17269be881f696fbfdf2d83dda33e
+#4 resolve docker.io/docker/dockerfile:1.7@sha256:a57df69d0ea827fb7266491f2813635de6f17269be881f696fbfdf2d83dda33e 0.0s done
+#4 CACHED
+
+#5 [internal] load metadata for docker.io/library/debian:bookworm-slim
+#5 DONE 0.7s
+
+#6 [internal] load metadata for ghcr.io/graalvm/native-image-community:21
+#6 DONE 0.8s
+
+#7 [internal] load metadata for docker.io/library/maven:3.9.9-eclipse-temurin-21
+#7 DONE 0.7s
+
+#8 [internal] load .dockerignore
+#8 transferring context: 83B done
+#8 DONE 0.0s
+
+#9 [internal] load build context
+#9 DONE 0.0s
+
+#10 [build 1/7] FROM ghcr.io/graalvm/native-image-community:21@sha256:faed0fd6809b138254bdd6c7046e56894f4d9566ecbc7b0952aab43e65e16e0e
+#10 resolve ghcr.io/graalvm/native-image-community:21@sha256:faed0fd6809b138254bdd6c7046e56894f4d9566ecbc7b0952aab43e65e16e0e 0.0s done
+#10 DONE 0.0s
+
+#11 [runtime 1/4] FROM docker.io/library/debian:bookworm-slim@sha256:0104b334637a5f19aa9c983a91b54c89887c0984081f2068983107a6f6c21eeb
+#11 resolve docker.io/library/debian:bookworm-slim@sha256:0104b334637a5f19aa9c983a91b54c89887c0984081f2068983107a6f6c21eeb
+#11 resolve docker.io/library/debian:bookworm-slim@sha256:0104b334637a5f19aa9c983a91b54c89887c0984081f2068983107a6f6c21eeb 0.0s done
+#11 DONE 0.1s
+
+#12 FROM docker.io/library/maven:3.9.9-eclipse-temurin-21@sha256:3a4ab3276a087bf276f79cae96b1af04f53731bec53fb2e651aca79e4b10211e
+#12 resolve docker.io/library/maven:3.9.9-eclipse-temurin-21@sha256:3a4ab3276a087bf276f79cae96b1af04f53731bec53fb2e651aca79e4b10211e 0.0s done
+#12 DONE 0.1s
+
+#9 [internal] load build context
+#9 transferring context: 6.08kB done
+#9 DONE 0.0s
+
+#13 [build 3/7] RUN ln -sf /usr/share/maven/bin/mvn /usr/local/bin/mvn
+#13 CACHED
+
+#14 [build 4/7] WORKDIR /build
+#14 CACHED
+
+#15 [build 2/7] COPY --from=maven:3.9.9-eclipse-temurin-21 /usr/share/maven /usr/share/maven
+#15 CACHED
+
+#16 [build 5/7] COPY pom.xml .
+#16 CACHED
+
+#17 [build 6/7] COPY src ./src
+#17 DONE 0.1s
+
+#18 [build 7/7] RUN --mount=type=cache,target=/root/.m2     PROFILE="$([ "reactive" = "imperative" ] && echo imperative || echo reactive)";     echo "Building Quarkus paradigm=reactive (profile=$PROFILE) packaging=native";     mvn -B -ntp -P"$PROFILE" -Dnative -DskipTests package
+#18 0.120 Building Quarkus paradigm=reactive (profile=reactive) packaging=native
+#18 0.848 [INFO] Scanning for projects...
+#18 1.372 [INFO] 
+#18 1.372 [INFO] -------------------< io.pulsegrid:pulsegrid-quarkus >-------------------
+#18 1.372 [INFO] Building pulsegrid-quarkus 1.0.0
+#18 1.372 [INFO]   from pom.xml
+#18 1.372 [INFO] --------------------------------[ jar ]---------------------------------
+#18 1.575 [INFO] 
+#18 1.575 [INFO] --- build-helper:3.6.0:add-source (add-reactive-sources) @ pulsegrid-quarkus ---
+#18 1.617 [INFO] Source directory: /build/src/main/java-reactive added.
+#18 1.618 [INFO] 
+#18 1.618 [INFO] --- resources:3.3.1:resources (default-resources) @ pulsegrid-quarkus ---
+#18 1.641 [INFO] Copying 1 resource from src/main/resources to target/classes
+#18 1.644 [INFO] 
+#18 1.644 [INFO] --- quarkus:3.17.5:generate-code (default) @ pulsegrid-quarkus ---
+#18 2.133 [INFO] 
+#18 2.133 [INFO] --- compiler:3.13.0:compile (default-compile) @ pulsegrid-quarkus ---
+#18 2.205 [INFO] Recompiling the module because of changed source code.
+#18 2.208 [INFO] Compiling 19 source files with javac [debug parameters release 21] to target/classes
+#18 2.684 [INFO] 
+#18 2.684 [INFO] --- resources:3.3.1:testResources (default-testResources) @ pulsegrid-quarkus ---
+#18 2.686 [INFO] skip non existing resourceDirectory /build/src/test/resources
+#18 2.686 [INFO] 
+#18 2.686 [INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ pulsegrid-quarkus ---
+#18 2.688 [INFO] No sources to compile
+#18 2.688 [INFO] 
+#18 2.688 [INFO] --- surefire:3.2.5:test (default-test) @ pulsegrid-quarkus ---
+#18 2.742 [INFO] Tests are skipped.
+#18 2.742 [INFO] 
+#18 2.742 [INFO] --- jar:3.4.1:jar (default-jar) @ pulsegrid-quarkus ---
+#18 2.822 [INFO] Building jar: /build/target/pulsegrid-quarkus.jar
+#18 2.839 [INFO] 
+#18 2.839 [INFO] --- quarkus:3.17.5:build (default) @ pulsegrid-quarkus ---
+#18 4.070 [INFO] [io.quarkus.deployment.pkg.steps.JarResultBuildStep] Building native image source jar: /build/target/pulsegrid-quarkus-native-image-source-jar/pulsegrid-quarkus-runner.jar
+#18 4.347 [INFO] [io.quarkus.deployment.pkg.steps.NativeImageBuildStep] Building native image from /build/target/pulsegrid-quarkus-native-image-source-jar/pulsegrid-quarkus-runner.jar
+#18 4.456 [INFO] [io.quarkus.deployment.pkg.steps.NativeImageBuildStep] Running Quarkus native-image plugin on GRAALVM 23.1 JDK 21.0.2+13-jvmci-23.1-b30
+#18 4.458 [INFO] [io.quarkus.deployment.pkg.steps.NativeImageBuildRunner] /usr/lib64/graalvm/graalvm-community-java21/bin/native-image -J-Dsun.nio.ch.maxUpdateArraySize=100 -J-Djava.util.logging.manager=org.jboss.logmanager.LogManager -J-Duser.language=en -J-Duser.country=US -J-Dlogging.initial-configurator.min-level=500 -J-Dvertx.logger-delegate-factory-class-name=io.quarkus.vertx.core.runtime.VertxLogDelegateFactory -J-Dvertx.disableDnsResolver=true -J-Dio.netty.leakDetection.level=DISABLED -J-Dio.netty.allocator.maxOrder=3 -H:+UnlockExperimentalVMOptions -H:IncludeLocales=en-US -H:-UnlockExperimentalVMOptions -J-Dfile.encoding=UTF-8 --features=io.quarkus.hibernate.validator.runtime.DisableLoggingFeature,io.quarkus.runner.Feature,io.quarkus.runtime.graal.DisableLoggingFeature -J--add-exports=java.security.jgss/sun.security.krb5=ALL-UNNAMED -J--add-exports=java.security.jgss/sun.security.jgss=ALL-UNNAMED -J--add-opens=java.base/java.text=ALL-UNNAMED -J--add-opens=java.base/java.io=ALL-UNNAMED -J--add-opens=java.base/java.lang.invoke=ALL-UNNAMED -J--add-opens=java.base/java.util=ALL-UNNAMED -H:+UnlockExperimentalVMOptions -H:BuildOutputJSONFile=pulsegrid-quarkus-runner-build-output-stats.json -H:-UnlockExperimentalVMOptions -H:+UnlockExperimentalVMOptions -H:+GenerateBuildArtifactsFile -H:-UnlockExperimentalVMOptions --strict-image-heap -H:+UnlockExperimentalVMOptions -H:+AllowFoldMethods -H:-UnlockExperimentalVMOptions -J-Djava.awt.headless=true --no-fallback --link-at-build-time -H:+UnlockExperimentalVMOptions -H:+ReportExceptionStackTraces -H:-UnlockExperimentalVMOptions -H:-AddAllCharsets --enable-url-protocols=http,https -H:NativeLinkerOption=-no-pie --enable-monitoring=heapdump -H:+UnlockExperimentalVMOptions -H:-UseServiceLoaderFeature -H:-UnlockExperimentalVMOptions -H:+UnlockExperimentalVMOptions -H:AdditionalSecurityProviders=com.sun.security.sasl.Provider,org.apache.kafka.common.security.oauthbearer.internals.OAuthBearerSaslClientProvider,org.apache.kafka.common.security.scram.internals.ScramSaslClientProvider -H:-UnlockExperimentalVMOptions -J--add-exports=org.graalvm.nativeimage/org.graalvm.nativeimage.impl=ALL-UNNAMED --exclude-config io\.netty\.netty-codec /META-INF/native-image/io\.netty/netty-codec/generated/handlers/reflect-config\.json --exclude-config io\.netty\.netty-handler /META-INF/native-image/io\.netty/netty-handler/generated/handlers/reflect-config\.json pulsegrid-quarkus-runner -jar pulsegrid-quarkus-runner.jar
+#18 6.618 ========================================================================================================================
+#18 6.619 GraalVM Native Image: Generating 'pulsegrid-quarkus-runner' (executable)...
+#18 6.619 ========================================================================================================================
+#18 6.619 For detailed information and explanations on the build output, visit:
+#18 6.619 https://github.com/oracle/graal/blob/master/docs/reference-manual/native-image/BuildOutput.md
+#18 6.619 ------------------------------------------------------------------------------------------------------------------------
+#18 8.013 [1/8] Initializing...                                                                                    (3.0s @ 0.18GB)
+#18 8.013  Java version: 21.0.2+13, vendor version: GraalVM CE 21.0.2+13.1
+#18 8.014  Graal compiler: optimization level: 2, target machine: armv8-a
+#18 8.014  C compiler: gcc (redhat, aarch64, 11.4.1)
+#18 8.014  Garbage collector: Serial GC (max heap size: 80% of RAM)
+#18 8.014  4 user-specific feature(s):
+#18 8.014  - com.oracle.svm.thirdparty.gson.GsonFeature
+#18 8.014  - io.quarkus.hibernate.validator.runtime.DisableLoggingFeature: Disables INFO logging during the analysis phase for the [org.hibernate.validator.internal.util.Version] categories
+#18 8.014  - io.quarkus.runner.Feature: Auto-generated class by Quarkus from the existing extensions
+#18 8.014  - io.quarkus.runtime.graal.DisableLoggingFeature: Adapts logging during the analysis phase
+#18 8.015 ------------------------------------------------------------------------------------------------------------------------
+#18 8.015  5 experimental option(s) unlocked:
+#18 8.015  - '-H:+AllowFoldMethods' (origin(s): command line)
+#18 8.015  - '-H:BuildOutputJSONFile' (origin(s): command line)
+#18 8.016  - '-H:-UseServiceLoaderFeature' (origin(s): command line)
+#18 8.016  - '-H:AdditionalSecurityProviders' (origin(s): command line)
+#18 8.016  - '-H:+GenerateBuildArtifactsFile' (origin(s): command line)
+#18 8.016 ------------------------------------------------------------------------------------------------------------------------
+#18 8.016 Build resources:
+#18 8.016  - 5.90GB of memory (75.6% of 7.81GB system memory, determined at start)
+#18 8.016  - 8 thread(s) (100.0% of 8 available processor(s), determined at start)
+#18 32.89 [2/8] Performing analysis...  [*****]                                                                   (24.8s @ 1.85GB)
+#18 32.89    18,029 reachable types   (88.5% of   20,380 total)
+#18 32.90    27,557 reachable fields  (63.7% of   43,293 total)
+#18 32.95    93,727 reachable methods (57.8% of  162,148 total)
+#18 32.95     5,311 types,   180 fields, and 4,058 methods registered for reflection
+#18 32.95        64 types,    73 fields, and    55 methods registered for JNI access
+#18 32.95         4 native libraries: dl, pthread, rt, z
+#18 37.92 [3/8] Building universe...                                                                               (5.0s @ 2.03GB)
+#18 42.49 [4/8] Parsing methods...      [**]                                                                       (4.5s @ 2.22GB)
+#18 47.05 [5/8] Inlining methods...     [***]                                                                      (4.0s @ 1.37GB)
+#18 77.28 [6/8] Compiling methods...    [*****]                                                                   (30.2s @ 1.93GB)
+#18 83.61 [7/8] Layouting methods...    [***]                                                                      (6.3s @ 1.72GB)
+#18 88.43 [8/8] Creating image...       [**]                                                                       (4.7s @ 2.58GB)
+#18 88.43   38.04MB (48.93%) for code area:    59,679 compilation units
+#18 88.43   39.37MB (50.65%) for image heap:  422,416 objects and 58 resources
+#18 88.43  333.88kB ( 0.42%) for other data
+#18 88.43   77.73MB in total
+#18 88.43 ------------------------------------------------------------------------------------------------------------------------
+#18 88.43 Top 10 origins of code area:                                Top 10 object types in image heap:
+#18 88.43   12.47MB java.base                                           12.58MB byte[] for code metadata
+#18 88.43    8.12MB org.apache.kafka.kafka-clients-3.7.1.jar             6.02MB byte[] for java.lang.String
+#18 88.43    1.81MB c.f.jackson.core.jackson-databind-2.18.2.jar         4.47MB java.lang.Class
+#18 88.43    1.72MB pulsegrid-quarkus-runner.jar                         3.92MB java.lang.String
+#18 88.43    1.35MB svm.jar (Native Image)                               1.51MB com.oracle.svm.core.hub.DynamicHubCompanion
+#18 88.43    1.16MB modified-io.vertx.vertx-core-4.5.11.jar              1.03MB byte[] for general heap data
+#18 88.43  690.24kB io.netty.netty-buffer-4.1.115.Final.jar           1019.04kB byte[] for reflection metadata
+#18 88.43  606.86kB java.security.jgss                                 806.37kB java.lang.String[]
+#18 88.43  588.07kB com.fasterxml.jackson.core.jackson-core-2.18.2.jar 657.54kB c.o.svm.core.hub.DynamicHub$ReflectionMetadata
+#18 88.43  513.09kB io.netty.netty-common-4.1.115.Final.jar            619.31kB java.util.HashMap$Node
+#18 88.43    8.72MB for 137 more packages                                6.80MB for 4724 more object types
+#18 88.43 ------------------------------------------------------------------------------------------------------------------------
+#18 88.43 Recommendations:
+#18 88.43  HEAP: Set max heap for improved and more predictable memory usage.
+#18 88.43  CPU:  Enable more CPU features with '-march=native' for improved performance.
+#18 88.44 ------------------------------------------------------------------------------------------------------------------------
+#18 88.44                        13.6s (16.3% of total time) in 142 GCs | Peak RSS: 4.26GB | CPU load: 6.26
+#18 88.44 ------------------------------------------------------------------------------------------------------------------------
+#18 88.44 Produced artifacts:
+#18 88.44  /build/target/pulsegrid-quarkus-native-image-source-jar/build-artifacts.json (build_info)
+#18 88.44  /build/target/pulsegrid-quarkus-native-image-source-jar/pulsegrid-quarkus-runner (executable)
+#18 88.44  /build/target/pulsegrid-quarkus-native-image-source-jar/pulsegrid-quarkus-runner-build-output-stats.json (build_info)
+#18 88.44 ========================================================================================================================
+#18 88.44 Finished generating 'pulsegrid-quarkus-runner' in 1m 23s.
+#18 88.57 [INFO] [io.quarkus.deployment.pkg.steps.NativeImageBuildRunner] objcopy --strip-debug pulsegrid-quarkus-runner
+#18 88.77 [INFO] [io.quarkus.deployment.QuarkusAugmentor] Quarkus augmentation completed in 85919ms
+#18 88.79 [INFO] ------------------------------------------------------------------------
+#18 88.79 [INFO] BUILD SUCCESS
+#18 88.79 [INFO] ------------------------------------------------------------------------
+#18 88.79 [INFO] Total time:  01:27 min
+#18 88.79 [INFO] Finished at: 2026-06-04T00:15:48Z
+#18 88.79 [INFO] ------------------------------------------------------------------------
+#18 DONE 88.9s
+
+#19 [runtime 2/4] WORKDIR /app
+#19 CACHED
+
+#20 [runtime 3/4] RUN apt-get update && apt-get install -y --no-install-recommends curl libstdc++6 zlib1g     && rm -rf /var/lib/apt/lists/*
+#20 CACHED
+
+#21 [runtime 4/4] COPY --from=build /build/target/pulsegrid-quarkus-runner /app/pulsegrid-quarkus
+#21 DONE 0.1s
+
+#22 exporting to image
+#22 exporting layers
+#22 exporting layers 1.7s done
+#22 exporting manifest sha256:032f2b74cbe9f0a3e2d323b8b32f7b1b9133e55b272afcdaebb8c5fbb7dd99fe 0.0s done
+#22 exporting config sha256:5c3f6c8f88aad060b231b46d94200deb76067d45e4c1ec3633175d5d9d7d8224 0.0s done
+#22 exporting attestation manifest sha256:d11e08b2918ce7c23db74403da5ebd6c5a07ebe141d56f108cfebff5cd4632dc 0.0s done
+#22 exporting manifest list sha256:5b87d21f6daae9aa01300ac024005c97faa457678913d8dd5c24b082fa5471d2 0.0s done
+#22 naming to docker.io/pulsegrid/quarkus-reactive-native:latest done
+#22 unpacking to docker.io/pulsegrid/quarkus-reactive-native:latest
+#22 unpacking to docker.io/pulsegrid/quarkus-reactive-native:latest 0.2s done
+#22 DONE 2.1s
+
+#23 resolving provenance for metadata file
+#23 DONE 0.0s
+ Image pulsegrid/quarkus-reactive-native Built 

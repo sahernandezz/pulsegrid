@@ -1,0 +1,37 @@
+# syntax=docker/dockerfile:1.7
+# =============================================================================
+# PulseGrid · Quarkus · JVM packaging (fast-jar)
+# Parametrized by PARADIGM (reactive | imperative) -> Maven profile + quarkus.profile.
+# Build context = backends/quarkus (set by docker-compose).
+# =============================================================================
+ARG PARADIGM=reactive
+
+# --- build stage -------------------------------------------------------------
+FROM eclipse-temurin:21-jdk AS build
+ARG PARADIGM
+COPY --from=maven:3.9.9-eclipse-temurin-21 /usr/share/maven /usr/share/maven
+RUN ln -sf /usr/share/maven/bin/mvn /usr/local/bin/mvn
+WORKDIR /build
+COPY pom.xml .
+COPY src ./src
+RUN --mount=type=cache,target=/root/.m2 \
+    PROFILE="$([ "$PARADIGM" = "imperative" ] && echo imperative || echo reactive)"; \
+    echo "Building Quarkus paradigm=$PARADIGM (profile=$PROFILE) packaging=jvm"; \
+    mvn -B -ntp -P"$PROFILE" -DskipTests clean package
+
+# --- runtime stage (Quarkus fast-jar layout) ---------------------------------
+FROM eclipse-temurin:21-jre AS runtime
+ARG PARADIGM
+ENV PG_PARADIGM=${PARADIGM}
+WORKDIR /app
+RUN apt-get update && apt-get install -y --no-install-recommends curl \
+    && rm -rf /var/lib/apt/lists/*
+# Quarkus-recommended copy order for good layer caching:
+COPY --from=build /build/target/quarkus-app/lib/      /app/lib/
+COPY --from=build /build/target/quarkus-app/*.jar     /app/
+COPY --from=build /build/target/quarkus-app/app/      /app/app/
+COPY --from=build /build/target/quarkus-app/quarkus/  /app/quarkus/
+EXPOSE 8080
+# quarkus.profile (reactive|imperative) selects the right datasource.
+# JAVA_OPTS comes from compose (-XX:MaxRAMPercentage=75.0, container-aware).
+ENTRYPOINT ["sh", "-c", "exec java $JAVA_OPTS -Dquarkus.profile=$([ \"$PG_PARADIGM\" = imperative ] && echo imperative || echo reactive) -jar /app/quarkus-run.jar"]

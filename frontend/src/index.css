@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: dark; }
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  html, body, #root { min-height: 100%; }
+
+  body {
+    @apply bg-ink text-fg font-body antialiased;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'cv05' 1, 'ss01' 1; /* Inter — friendlier letterforms */
+  }
+
+  h1, h2, h3 { @apply font-display; letter-spacing: -0.015em; }
+
+  ::selection { background: rgba(45, 212, 191, 0.28); color: #e6e9ef; }
+
+  /* visible focus for keyboard users only */
+  :focus-visible { outline: none; box-shadow: theme('boxShadow.focus'); border-radius: 6px; }
+
+  *::-webkit-scrollbar { width: 10px; height: 10px; }
+  *::-webkit-scrollbar-track { background: transparent; }
+  *::-webkit-scrollbar-thumb { background: #212833; border-radius: 99px; border: 2px solid #0a0c10; }
+  *::-webkit-scrollbar-thumb:hover { background: #2c3340; }
+}
+
+@layer components {
+  /* card surface — subtle border + elevation, gentle hover lift */
+  .card {
+    @apply rounded-card border border-line bg-panel shadow-card transition-colors;
+  }
+  .card-hover:hover { @apply border-line-strong; }
+
+  /* small uppercase eyebrow / section label */
+  .eyebrow {
+    @apply font-mono text-[11px] font-medium uppercase tracking-label text-dim;
+  }
+
+  /* monospaced data figure */
+  .stat { @apply font-mono tabular-nums; }
+
+  /* compact key label in mono */
+  .kbd { @apply font-mono text-[11px] text-muted; }
+
+  /* pill control — used by filters, limit selectors, view toggles */
+  .pill {
+    @apply inline-flex items-center gap-1.5 rounded-md border border-line bg-panel px-3 py-1.5
+           font-mono text-[12px] text-muted transition-colors
+           hover:border-line-strong hover:text-fg
+           focus-visible:text-fg disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-line disabled:hover:text-muted;
+  }
+  .pill[data-active='true'] {
+    @apply border-pulse/45 bg-pulse/10 text-pulse hover:border-pulse/45 hover:text-pulse;
+  }
+
+  /* status / metadata tag */
+  .tag {
+    @apply inline-flex items-center gap-1.5 rounded-md border border-line bg-panel px-2.5 py-1
+           font-mono text-[11px] text-muted;
+  }
+}
+
+#root { position: relative; z-index: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

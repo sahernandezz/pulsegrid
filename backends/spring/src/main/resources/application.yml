@@ -1,0 +1,38 @@
+# =============================================================================
+# Config COMMON to both Spring variants. Paradigm-specific config lives in
+# application-vt.yml / application-webflux.yml, activated by SPRING_PROFILES_ACTIVE
+# (set by the Dockerfile based on the PARADIGM build-arg).
+# =============================================================================
+server:
+  port: ${SERVER_PORT:8080}
+  shutdown: graceful
+
+spring:
+  application:
+    name: pulsegrid-spring
+  # The schema is created by db/migrations (postgres initdb); the app NEVER touches DDL.
+  sql:
+    init:
+      mode: never
+
+# Observability: rich health + Prometheus at /actuator/prometheus
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+
+pulsegrid:
+  # http | queue  (reads the INGEST_MODE env var; defaults to http)
+  ingest-mode: ${INGEST_MODE:http}
+  kafka:
+    bootstrap: ${KAFKA_BOOTSTRAP:localhost:9092}
+    topic: ${KAFKA_TOPIC:metric-events}

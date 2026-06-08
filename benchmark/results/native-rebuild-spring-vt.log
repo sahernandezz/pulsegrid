@@ -1,0 +1,282 @@
+ Image pulsegrid/spring-vt-native Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 670B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile.native
+#2 transferring dockerfile: 2.13kB done
+#2 DONE 0.0s
+
+#3 resolve image config for docker-image://docker.io/docker/dockerfile:1.7
+#3 DONE 0.8s
+
+#4 docker-image://docker.io/docker/dockerfile:1.7@sha256:a57df69d0ea827fb7266491f2813635de6f17269be881f696fbfdf2d83dda33e
+#4 resolve docker.io/docker/dockerfile:1.7@sha256:a57df69d0ea827fb7266491f2813635de6f17269be881f696fbfdf2d83dda33e 0.0s done
+#4 CACHED
+
+#5 [internal] load metadata for ghcr.io/graalvm/native-image-community:25
+#5 ...
+
+#6 [internal] load metadata for docker.io/library/debian:bookworm-slim
+#6 DONE 0.6s
+
+#7 [internal] load metadata for docker.io/library/maven:3.9.9-eclipse-temurin-21
+#7 DONE 0.7s
+
+#5 [internal] load metadata for ghcr.io/graalvm/native-image-community:25
+#5 DONE 0.7s
+
+#8 [internal] load .dockerignore
+#8 transferring context: 83B done
+#8 DONE 0.0s
+
+#9 [internal] load build context
+#9 DONE 0.0s
+
+#10 [build 1/7] FROM ghcr.io/graalvm/native-image-community:25@sha256:0d936f32bb8acb5bc60c41b33e05f064d7a6aaf36b726538296c54949bd4a3c0
+#10 resolve ghcr.io/graalvm/native-image-community:25@sha256:0d936f32bb8acb5bc60c41b33e05f064d7a6aaf36b726538296c54949bd4a3c0 0.0s done
+#10 DONE 0.0s
+
+#11 FROM docker.io/library/maven:3.9.9-eclipse-temurin-21@sha256:3a4ab3276a087bf276f79cae96b1af04f53731bec53fb2e651aca79e4b10211e
+#11 resolve docker.io/library/maven:3.9.9-eclipse-temurin-21@sha256:3a4ab3276a087bf276f79cae96b1af04f53731bec53fb2e651aca79e4b10211e 0.0s done
+#11 DONE 0.0s
+
+#12 [runtime 1/4] FROM docker.io/library/debian:bookworm-slim@sha256:0104b334637a5f19aa9c983a91b54c89887c0984081f2068983107a6f6c21eeb
+#12 resolve docker.io/library/debian:bookworm-slim@sha256:0104b334637a5f19aa9c983a91b54c89887c0984081f2068983107a6f6c21eeb
+#12 resolve docker.io/library/debian:bookworm-slim@sha256:0104b334637a5f19aa9c983a91b54c89887c0984081f2068983107a6f6c21eeb 0.0s done
+#12 DONE 0.0s
+
+#9 [internal] load build context
+#9 transferring context: 5.89kB done
+#9 DONE 0.0s
+
+#13 [build 2/7] COPY --from=maven:3.9.9-eclipse-temurin-21 /usr/share/maven /usr/share/maven
+#13 CACHED
+
+#14 [build 3/7] RUN ln -sf /usr/share/maven/bin/mvn /usr/local/bin/mvn
+#14 CACHED
+
+#15 [build 4/7] WORKDIR /build
+#15 CACHED
+
+#16 [build 5/7] COPY pom.xml .
+#16 DONE 0.0s
+
+#17 [build 6/7] COPY src ./src
+#17 DONE 0.1s
+
+#18 [build 7/7] RUN --mount=type=cache,target=/root/.m2     PROFILE="$([ "virtual-threads" = "webflux" ] && echo webflux || echo vt)";     echo "Building Spring paradigm=virtual-threads (profile=$PROFILE) packaging=native";     mvn -B -ntp -P"$PROFILE",native -DskipTests clean package
+#18 0.126 Building Spring paradigm=virtual-threads (profile=vt) packaging=native
+#18 0.330 WARNING: A restricted method in java.lang.System has been called
+#18 0.330 WARNING: java.lang.System::load has been called by org.fusesource.jansi.internal.JansiLoader in an unnamed module (file:/usr/share/maven/lib/jansi-2.4.1.jar)
+#18 0.330 WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+#18 0.330 WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+#18 0.330 
+#18 0.441 WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+#18 0.441 WARNING: sun.misc.Unsafe::objectFieldOffset has been called by com.google.common.util.concurrent.AbstractFuture$UnsafeAtomicHelper (file:/usr/share/maven/lib/guava-33.2.1-jre.jar)
+#18 0.441 WARNING: Please consider reporting this to the maintainers of class com.google.common.util.concurrent.AbstractFuture$UnsafeAtomicHelper
+#18 0.441 WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+#18 0.728 [INFO] Scanning for projects...
+#18 0.937 [INFO] 
+#18 0.937 [INFO] -------------------< io.pulsegrid:pulsegrid-spring >--------------------
+#18 0.937 [INFO] Building pulsegrid-spring 1.0.0
+#18 0.937 [INFO]   from pom.xml
+#18 0.937 [INFO] --------------------------------[ jar ]---------------------------------
+#18 1.044 [INFO] 
+#18 1.044 [INFO] --- clean:3.5.0:clean (default-clean) @ pulsegrid-spring ---
+#18 1.063 [INFO] 
+#18 1.063 [INFO] --- build-helper:3.6.0:add-source (add-vt-sources) @ pulsegrid-spring ---
+#18 1.083 [INFO] Source directory: /build/src/main/java-vt added.
+#18 1.083 [INFO] 
+#18 1.083 [INFO] --- native:0.11.3:add-reachability-metadata (add-reachability-metadata) @ pulsegrid-spring ---
+#18 1.091 [INFO] Downloaded GraalVM reachability metadata repository from file:/root/.m2/repository/org/graalvm/buildtools/graalvm-reachability-metadata/0.11.3/graalvm-reachability-metadata-0.11.3-repository.zip
+#18 1.123 [INFO] [graalvm reachability metadata repository for ch.qos.logback:logback-classic:1.5.21]: Configuration directory not found. Trying latest version.
+#18 1.124 [INFO] [graalvm reachability metadata repository for ch.qos.logback:logback-classic:1.5.21]: Configuration directory is ch.qos.logback/logback-classic/1.4.9
+#18 1.124 [INFO] [graalvm reachability metadata repository for org.hdrhistogram:HdrHistogram:2.2.2]: Configuration directory not found. Trying latest version.
+#18 1.124 [INFO] [graalvm reachability metadata repository for org.hdrhistogram:HdrHistogram:2.2.2]: Configuration directory is org.hdrhistogram/HdrHistogram/2.1.12
+#18 1.124 [INFO] [graalvm reachability metadata repository for org.hibernate.validator:hibernate-validator:9.0.1.Final]: Configuration directory is org.hibernate.validator/hibernate-validator/7.0.4.Final
+#18 1.124 [INFO] [graalvm reachability metadata repository for org.hibernate.validator:hibernate-validator:9.0.1.Final]: Configuration directory not found. Trying latest version.
+#18 1.124 [INFO] [graalvm reachability metadata repository for org.hibernate.validator:hibernate-validator:9.0.1.Final]: Latest version not found!
+#18 1.124 [INFO] [graalvm reachability metadata repository for org.hibernate.validator:hibernate-validator:9.0.1.Final]: missing.
+#18 1.125 [INFO] [graalvm reachability metadata repository for org.jboss.logging:jboss-logging:3.6.1.Final]: Configuration directory not found. Trying latest version.
+#18 1.125 [INFO] [graalvm reachability metadata repository for org.jboss.logging:jboss-logging:3.6.1.Final]: Configuration directory is org.jboss.logging/jboss-logging/3.5.0.Final
+#18 1.125 [INFO] [graalvm reachability metadata repository for org.apache.tomcat.embed:tomcat-embed-core:11.0.14]: Configuration directory not found. Trying latest version.
+#18 1.125 [INFO] [graalvm reachability metadata repository for org.apache.tomcat.embed:tomcat-embed-core:11.0.14]: Configuration directory is org.apache.tomcat.embed/tomcat-embed-core/10.0.20
+#18 1.126 [INFO] [graalvm reachability metadata repository for com.zaxxer:HikariCP:7.0.2]: Configuration directory is com.zaxxer/HikariCP/6.0.0
+#18 1.126 [INFO] [graalvm reachability metadata repository for org.postgresql:postgresql:42.7.8]: Configuration directory not found. Trying latest version.
+#18 1.126 [INFO] [graalvm reachability metadata repository for org.postgresql:postgresql:42.7.8]: Configuration directory is org.postgresql/postgresql/42.7.3
+#18 1.126 [INFO] [graalvm reachability metadata repository for commons-logging:commons-logging:1.3.5]: Configuration directory is commons-logging/commons-logging/1.2
+#18 1.126 [INFO] [graalvm reachability metadata repository for org.apache.kafka:kafka-clients:4.1.1]: Configuration directory not found. Trying latest version.
+#18 1.126 [INFO] [graalvm reachability metadata repository for org.apache.kafka:kafka-clients:4.1.1]: Configuration directory is org.apache.kafka/kafka-clients/3.5.1
+#18 1.126 [INFO] [graalvm reachability metadata repository for com.github.luben:zstd-jni:1.5.6-10]: Configuration directory not found. Trying latest version.
+#18 1.126 [INFO] [graalvm reachability metadata repository for com.github.luben:zstd-jni:1.5.6-10]: Configuration directory is com.github.luben/zstd-jni/1.5.2-5
+#18 1.131 [INFO] 
+#18 1.131 [INFO] --- resources:3.3.1:resources (default-resources) @ pulsegrid-spring ---
+#18 1.155 [INFO] Copying 3 resources from src/main/resources to target/classes
+#18 1.162 [INFO] Copying 0 resource from src/main/resources to target/classes
+#18 1.162 [INFO] 
+#18 1.162 [INFO] --- compiler:3.14.1:compile (default-compile) @ pulsegrid-spring ---
+#18 1.244 [INFO] Recompiling the module because of changed source code.
+#18 1.249 [INFO] Compiling 24 source files with javac [debug parameters release 25] to target/classes
+#18 1.734 [INFO] 
+#18 1.734 [INFO] --- resources:3.3.1:testResources (default-testResources) @ pulsegrid-spring ---
+#18 1.735 [INFO] skip non existing resourceDirectory /build/src/test/resources
+#18 1.735 [INFO] 
+#18 1.735 [INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ pulsegrid-spring ---
+#18 1.737 [INFO] No sources to compile
+#18 1.737 [INFO] 
+#18 1.737 [INFO] --- surefire:3.5.4:test (default-test) @ pulsegrid-spring ---
+#18 1.773 [WARNING]  Parameter 'systemProperties' is deprecated: Use systemPropertyVariables instead.
+#18 1.777 [INFO] Tests are skipped.
+#18 1.777 [INFO] 
+#18 1.777 [INFO] --- spring-boot:4.0.0:process-aot (process-aot) @ pulsegrid-spring ---
+#18 2.165 
+#18 2.165   .   ____          _            __ _ _
+#18 2.165  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+#18 2.165 ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+#18 2.165  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+#18 2.165   '  |____| .__|_| |_|_| |_\__, | / / / /
+#18 2.165  =========|_|==============|___/=/_/_/_/
+#18 2.165 
+#18 2.170  :: Spring Boot ::                (v4.0.0)
+#18 2.170 
+#18 2.192 2026-06-04T00:19:15.598Z  INFO 55 --- [pulsegrid-spring] [           main] io.pulsegrid.SpringVtApplication         : Starting SpringVtApplication using Java 25.0.2 with PID 55 (/build/target/classes started by root in /build)
+#18 2.193 2026-06-04T00:19:15.600Z  INFO 55 --- [pulsegrid-spring] [           main] io.pulsegrid.SpringVtApplication         : The following 1 profile is active: "vt"
+#18 3.718 [INFO] 
+#18 3.718 [INFO] --- jar:3.4.2:jar (default-jar) @ pulsegrid-spring ---
+#18 3.814 [INFO] Building jar: /build/target/pulsegrid-spring.jar
+#18 3.850 [INFO] 
+#18 3.850 [INFO] --- spring-boot:4.0.0:repackage (repackage) @ pulsegrid-spring ---
+#18 4.007 [INFO] Replacing main artifact /build/target/pulsegrid-spring.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+#18 4.007 [INFO] The original artifact has been renamed to /build/target/pulsegrid-spring.jar.original
+#18 4.007 [INFO] 
+#18 4.007 [INFO] --- native:0.11.3:compile-no-fork (build-native) @ pulsegrid-spring ---
+#18 4.009 [INFO] Obtained main class from plugin org.apache.maven.plugins:maven-jar-plugin with the following path: archive -> manifest -> mainClass
+#18 4.010 [INFO] Found GraalVM installation from JAVA_HOME variable.
+#18 4.082 [INFO] [graalvm reachability metadata repository for ch.qos.logback:logback-classic:1.5.21]: Configuration directory not found. Trying latest version.
+#18 4.082 [INFO] [graalvm reachability metadata repository for ch.qos.logback:logback-classic:1.5.21]: Configuration directory is ch.qos.logback/logback-classic/1.4.9
+#18 4.083 [INFO] [graalvm reachability metadata repository for org.hdrhistogram:HdrHistogram:2.2.2]: Configuration directory not found. Trying latest version.
+#18 4.083 [INFO] [graalvm reachability metadata repository for org.hdrhistogram:HdrHistogram:2.2.2]: Configuration directory is org.hdrhistogram/HdrHistogram/2.1.12
+#18 4.085 [INFO] [graalvm reachability metadata repository for org.hibernate.validator:hibernate-validator:9.0.1.Final]: Configuration directory is org.hibernate.validator/hibernate-validator/7.0.4.Final
+#18 4.085 [INFO] [graalvm reachability metadata repository for org.hibernate.validator:hibernate-validator:9.0.1.Final]: Configuration directory not found. Trying latest version.
+#18 4.085 [INFO] [graalvm reachability metadata repository for org.hibernate.validator:hibernate-validator:9.0.1.Final]: Latest version not found!
+#18 4.085 [INFO] [graalvm reachability metadata repository for org.hibernate.validator:hibernate-validator:9.0.1.Final]: missing.
+#18 4.085 [INFO] [graalvm reachability metadata repository for org.jboss.logging:jboss-logging:3.6.1.Final]: Configuration directory not found. Trying latest version.
+#18 4.085 [INFO] [graalvm reachability metadata repository for org.jboss.logging:jboss-logging:3.6.1.Final]: Configuration directory is org.jboss.logging/jboss-logging/3.5.0.Final
+#18 4.087 [INFO] [graalvm reachability metadata repository for org.apache.tomcat.embed:tomcat-embed-core:11.0.14]: Configuration directory not found. Trying latest version.
+#18 4.087 [INFO] [graalvm reachability metadata repository for org.apache.tomcat.embed:tomcat-embed-core:11.0.14]: Configuration directory is org.apache.tomcat.embed/tomcat-embed-core/10.0.20
+#18 4.088 [INFO] [graalvm reachability metadata repository for com.zaxxer:HikariCP:7.0.2]: Configuration directory is com.zaxxer/HikariCP/6.0.0
+#18 4.089 [INFO] [graalvm reachability metadata repository for org.postgresql:postgresql:42.7.8]: Configuration directory not found. Trying latest version.
+#18 4.089 [INFO] [graalvm reachability metadata repository for org.postgresql:postgresql:42.7.8]: Configuration directory is org.postgresql/postgresql/42.7.3
+#18 4.090 [INFO] [graalvm reachability metadata repository for commons-logging:commons-logging:1.3.5]: Configuration directory is commons-logging/commons-logging/1.2
+#18 4.092 [INFO] [graalvm reachability metadata repository for org.apache.kafka:kafka-clients:4.1.1]: Configuration directory not found. Trying latest version.
+#18 4.092 [INFO] [graalvm reachability metadata repository for org.apache.kafka:kafka-clients:4.1.1]: Configuration directory is org.apache.kafka/kafka-clients/3.5.1
+#18 4.092 [INFO] [graalvm reachability metadata repository for com.github.luben:zstd-jni:1.5.6-10]: Configuration directory not found. Trying latest version.
+#18 4.092 [INFO] [graalvm reachability metadata repository for com.github.luben:zstd-jni:1.5.6-10]: Configuration directory is com.github.luben/zstd-jni/1.5.2-5
+#18 4.094 [WARNING] No jdk toolchain configuration found
+#18 4.095 [INFO] Executing: /usr/lib64/graalvm/graalvm-community-java25/bin/native-image -cp /build/target/classes:/root/.m2/repository/org/springframework/boot/spring-boot-starter-actuator/4.0.0/spring-boot-starter-actuator-4.0.0.jar:/root/.m2/repository/org/springframework/boot/spring-boot-starter/4.0.0/spring-boot-starter-4.0.0.jar:/root/.m2/repository/org/springframework/boot/spring-boot-starter-logging/4.0.0/spring-boot-starter-logging-4.0.0.jar:/root/.m2/repository/ch/qos/logback/logback-classic/1.5.21/logback-classic-1.5.21.jar:/root/.m2/repository/ch/qos/logback/logback-core/1.5.21/logback-core-1.5.21.jar:/root/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.25.2/log4j-to-slf4j-2.25.2.jar:/root/.m2/repository/org/apache/logging/log4j/log4j-api/2.25.2/log4j-api-2.25.2.jar:/root/.m2/repository/org/slf4j/jul-to-slf4j/2.0.17/jul-to-slf4j-2.0.17.jar:/root/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/4.0.0/spring-boot-autoconfigure-4.0.0.jar:/root/.m2/repository/jakarta/annotation/jakarta.annotation-api/3.0.0/jakarta.annotation-api-3.0.0.jar:/root/.m2/repository/org/yaml/snakeyaml/2.5/snakeyaml-2.5.jar:/root/.m2/repository/org/springframework/boot/spring-boot-starter-micrometer-metrics/4.0.0/spring-boot-starter-micrometer-metrics-4.0.0.jar:/root/.m2/repository/org/springframework/boot/spring-boot-micrometer-metrics/4.0.0/spring-boot-micrometer-metrics-4.0.0.jar:/root/.m2/repository/org/springframework/boot/spring-boot-micrometer-observation/4.0.0/spring-boot-micrometer-observation-4.0.0.jar:/root/.m2/repository/org/springframework/boot/spring-boot-actuator-autoconfigure/4.0.0/spring-boot-actuator-autoconfigure-4.0.0.jar:/root/.m2/repository/org/springframework/boot/spring-boot-actuator/4.0.0/spring-boot-actuator-4.0.0.jar:/root/.m2/repository/org/springframework/boot/spring-boot-health/4.0.0/spring-boot-health-4.0.0.jar:/root/.m2/repository/org/springframework/boot/spring-boot/4.0.0/spring-boot-4.0.0.jar:/root/.m2/repository/io/micrometer/micrometer-observation/1.16.0/micrometer-observation-1.16.0.jar:/root/.m2/repository/io/micrometer/micrometer-commons/1.16.0/micrometer-commons-1.16.0.jar:/root/.m2/repository/io/micrometer/micrometer-jakarta9/1.16.0/micrometer-jakarta9-1.16.0.jar:/root/.m2/repository/io/micrometer/micrometer-registry-prometheus/1.16.0/micrometer-registry-prometheus-1.16.0.jar:/root/.m2/repository/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar:/root/.m2/repository/io/micrometer/micrometer-core/1.16.0/micrometer-core-1.16.0.jar:/root/.m2/repository/org/hdrhistogram/HdrHistogram/2.2.2/HdrHistogram-2.2.2.jar:/root/.m2/repository/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar:/root/.m2/repository/io/prometheus/prometheus-metrics-core/1.4.3/prometheus-metrics-core-1.4.3.jar:/root/.m2/repository/io/prometheus/prometheus-metrics-model/1.4.3/prometheus-metrics-model-1.4.3.jar:/root/.m2/repository/io/prometheus/prometheus-metrics-config/1.4.3/prometheus-metrics-config-1.4.3.jar:/root/.m2/repository/io/prometheus/prometheus-metrics-tracer-common/1.4.3/prometheus-metrics-tracer-common-1.4.3.jar:/root/.m2/repository/io/prometheus/prometheus-metrics-exposition-formats/1.4.3/prometheus-metrics-exposition-formats-1.4.3.jar:/root/.m2/repository/io/prometheus/prometheus-metrics-exposition-textformats/1.4.3/prometheus-metrics-exposition-textformats-1.4.3.jar:/root/.m2/repository/org/springframework/boot/spring-boot-starter-validation/4.0.0/spring-boot-starter-validation-4.0.0.jar:/root/.m2/repository/org/springframework/boot/spring-boot-validation/4.0.0/spring-boot-validation-4.0.0.jar:/root/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/11.0.14/tomcat-embed-el-11.0.14.jar:/root/.m2/repository/org/hibernate/validator/hibernate-validator/9.0.1.Final/hibernate-validator-9.0.1.Final.jar:/root/.m2/repository/jakarta/validation/jakarta.validation-api/3.1.1/jakarta.validation-api-3.1.1.jar:/root/.m2/repository/org/jboss/logging/jboss-logging/3.6.1.Final/jboss-logging-3.6.1.Final.jar:/root/.m2/repository/com/fasterxml/classmate/1.7.1/classmate-1.7.1.jar:/root/.m2/repository/org/springframework/boot/spring-boot-starter-web/4.0.0/spring-boot-starter-web-4.0.0.jar:/root/.m2/repository/org/springframework/boot/spring-boot-starter-jackson/4.0.0/spring-boot-starter-jackson-4.0.0.jar:/root/.m2/repository/org/springframework/boot/spring-boot-jackson/4.0.0/spring-boot-jackson-4.0.0.jar:/root/.m2/repository/tools/jackson/core/jackson-databind/3.0.2/jackson-databind-3.0.2.jar:/root/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.20/jackson-annotations-2.20.jar:/root/.m2/repository/tools/jackson/core/jackson-core/3.0.2/jackson-core-3.0.2.jar:/root/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/4.0.0/spring-boot-starter-tomcat-4.0.0.jar:/root/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat-runtime/4.0.0/spring-boot-starter-tomcat-runtime-4.0.0.jar:/root/.m2/repository/org/springframework/boot/spring-boot-web-server/4.0.0/spring-boot-web-server-4.0.0.jar:/root/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/11.0.14/tomcat-embed-core-11.0.14.jar:/root/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/11.0.14/tomcat-embed-websocket-11.0.14.jar:/root/.m2/repository/org/springframework/boot/spring-boot-tomcat/4.0.0/spring-boot-tomcat-4.0.0.jar:/root/.m2/repository/org/springframework/boot/spring-boot-http-converter/4.0.0/spring-boot-http-converter-4.0.0.jar:/root/.m2/repository/org/springframework/spring-web/7.0.1/spring-web-7.0.1.jar:/root/.m2/repository/org/springframework/boot/spring-boot-webmvc/4.0.0/spring-boot-webmvc-4.0.0.jar:/root/.m2/repository/org/springframework/boot/spring-boot-servlet/4.0.0/spring-boot-servlet-4.0.0.jar:/root/.m2/repository/org/springframework/spring-webmvc/7.0.1/spring-webmvc-7.0.1.jar:/root/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/4.0.0/spring-boot-starter-jdbc-4.0.0.jar:/root/.m2/repository/org/springframework/boot/spring-boot-jdbc/4.0.0/spring-boot-jdbc-4.0.0.jar:/root/.m2/repository/org/springframework/boot/spring-boot-sql/4.0.0/spring-boot-sql-4.0.0.jar:/root/.m2/repository/org/springframework/boot/spring-boot-transaction/4.0.0/spring-boot-transaction-4.0.0.jar:/root/.m2/repository/org/springframework/boot/spring-boot-persistence/4.0.0/spring-boot-persistence-4.0.0.jar:/root/.m2/repository/org/springframework/spring-jdbc/7.0.1/spring-jdbc-7.0.1.jar:/root/.m2/repository/com/zaxxer/HikariCP/7.0.2/HikariCP-7.0.2.jar:/root/.m2/repository/org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.jar:/root/.m2/repository/org/postgresql/postgresql/42.7.8/postgresql-42.7.8.jar:/root/.m2/repository/org/checkerframework/checker-qual/3.49.5/checker-qual-3.49.5.jar:/root/.m2/repository/org/springframework/kafka/spring-kafka/4.0.0/spring-kafka-4.0.0.jar:/root/.m2/repository/org/springframework/spring-context/7.0.1/spring-context-7.0.1.jar:/root/.m2/repository/org/springframework/spring-aop/7.0.1/spring-aop-7.0.1.jar:/root/.m2/repository/org/springframework/spring-beans/7.0.1/spring-beans-7.0.1.jar:/root/.m2/repository/org/springframework/spring-core/7.0.1/spring-core-7.0.1.jar:/root/.m2/repository/commons-logging/commons-logging/1.3.5/commons-logging-1.3.5.jar:/root/.m2/repository/org/springframework/spring-expression/7.0.1/spring-expression-7.0.1.jar:/root/.m2/repository/org/springframework/spring-messaging/7.0.1/spring-messaging-7.0.1.jar:/root/.m2/repository/org/springframework/spring-tx/7.0.1/spring-tx-7.0.1.jar:/root/.m2/repository/org/apache/kafka/kafka-clients/4.1.1/kafka-clients-4.1.1.jar:/root/.m2/repository/com/github/luben/zstd-jni/1.5.6-10/zstd-jni-1.5.6-10.jar:/root/.m2/repository/org/lz4/lz4-java/1.8.0/lz4-java-1.8.0.jar:/root/.m2/repository/org/xerial/snappy/snappy-java/1.1.10.7/snappy-java-1.1.10.7.jar --no-fallback -o /build/target/pulsegrid-spring -H:ConfigurationFileDirectories=/build/target/graalvm-reachability-metadata/c9d47c5641c0a0ec51da4460f30a1907cb831c95/org.hdrhistogram/HdrHistogram/2.1.12,/build/target/graalvm-reachability-metadata/c9d47c5641c0a0ec51da4460f30a1907cb831c95/org.jboss.logging/jboss-logging/3.5.0.Final,/build/target/graalvm-reachability-metadata/c9d47c5641c0a0ec51da4460f30a1907cb831c95/org.postgresql/postgresql/42.7.3,/build/target/graalvm-reachability-metadata/c9d47c5641c0a0ec51da4460f30a1907cb831c95/ch.qos.logback/logback-classic/1.4.9,/build/target/graalvm-reachability-metadata/c9d47c5641c0a0ec51da4460f30a1907cb831c95/org.hibernate.validator/hibernate-validator/7.0.4.Final,/build/target/graalvm-reachability-metadata/c9d47c5641c0a0ec51da4460f30a1907cb831c95/org.apache.kafka/kafka-clients/3.5.1,/build/target/graalvm-reachability-metadata/c9d47c5641c0a0ec51da4460f30a1907cb831c95/commons-logging/commons-logging/1.2,/build/target/graalvm-reachability-metadata/c9d47c5641c0a0ec51da4460f30a1907cb831c95/com.github.luben/zstd-jni/1.5.2-5,/build/target/graalvm-reachability-metadata/c9d47c5641c0a0ec51da4460f30a1907cb831c95/org.apache.tomcat.embed/tomcat-embed-core/10.0.20,/build/target/graalvm-reachability-metadata/c9d47c5641c0a0ec51da4460f30a1907cb831c95/com.zaxxer/HikariCP/6.0.0,/build/target/graalvm-reachability-metadata/c9d47c5641c0a0ec51da4460f30a1907cb831c95/org.hdrhistogram/HdrHistogram/2.1.12,/build/target/graalvm-reachability-metadata/c9d47c5641c0a0ec51da4460f30a1907cb831c95/org.jboss.logging/jboss-logging/3.5.0.Final,/build/target/graalvm-reachability-metadata/c9d47c5641c0a0ec51da4460f30a1907cb831c95/org.postgresql/postgresql/42.7.3,/build/target/graalvm-reachability-metadata/c9d47c5641c0a0ec51da4460f30a1907cb831c95/ch.qos.logback/logback-classic/1.4.9,/build/target/graalvm-reachability-metadata/c9d47c5641c0a0ec51da4460f30a1907cb831c95/org.hibernate.validator/hibernate-validator/7.0.4.Final,/build/target/graalvm-reachability-metadata/c9d47c5641c0a0ec51da4460f30a1907cb831c95/org.apache.kafka/kafka-clients/3.5.1,/build/target/graalvm-reachability-metadata/c9d47c5641c0a0ec51da4460f30a1907cb831c95/commons-logging/commons-logging/1.2,/build/target/graalvm-reachability-metadata/c9d47c5641c0a0ec51da4460f30a1907cb831c95/com.github.luben/zstd-jni/1.5.2-5,/build/target/graalvm-reachability-metadata/c9d47c5641c0a0ec51da4460f30a1907cb831c95/org.apache.tomcat.embed/tomcat-embed-core/10.0.20,/build/target/graalvm-reachability-metadata/c9d47c5641c0a0ec51da4460f30a1907cb831c95/com.zaxxer/HikariCP/6.0.0 --no-fallback -H:+ReportExceptionStackTraces io.pulsegrid.SpringVtApplication
+#18 4.490 Warning: Option 'DynamicProxyConfigurationResources' is deprecated and might be removed in a future release: This can be caused by a proxy-config.json file in your META-INF directory. Consider including proxy configuration in the reflection section of reachability-metadata.md instead.. Please refer to the GraalVM release notes.
+#18 4.490 Warning: Option 'DynamicProxyConfigurationResources' is deprecated and might be removed in a future release: This can be caused by a proxy-config.json file in your META-INF directory. Consider including proxy configuration in the reflection section of reachability-metadata.md instead.. Please refer to the GraalVM release notes.
+#18 4.490 Warning: Option 'DynamicProxyConfigurationResources' is deprecated and might be removed in a future release: This can be caused by a proxy-config.json file in your META-INF directory. Consider including proxy configuration in the reflection section of reachability-metadata.md instead.. Please refer to the GraalVM release notes.
+#18 6.598 ========================================================================================================================
+#18 6.599 GraalVM Native Image: Generating 'pulsegrid-spring' (executable)...
+#18 6.599 ========================================================================================================================
+#18 6.599 For detailed information and explanations on the build output, visit:
+#18 6.599 https://github.com/oracle/graal/blob/master/docs/reference-manual/native-image/BuildOutput.md
+#18 6.599 ------------------------------------------------------------------------------------------------------------------------
+#18 8.226 [1/8] Initializing...                                                                                    (3.6s @ 0.24GB)
+#18 8.227  Java version: 25.0.2+10, vendor version: GraalVM CE 25.0.2+10.1
+#18 8.227  Graal compiler: optimization level: 2, target machine: armv8.1-a
+#18 8.227  C compiler: gcc (redhat, aarch64, 14.3.1)
+#18 8.227  Garbage collector: Serial GC (max heap size: 80% of RAM)
+#18 8.227  2 user-specific feature(s):
+#18 8.227  - com.oracle.svm.thirdparty.gson.GsonFeature
+#18 8.227  - org.springframework.aot.nativex.feature.PreComputeFieldFeature
+#18 8.229 ------------------------------------------------------------------------------------------------------------------------
+#18 8.229 Build resources:
+#18 8.229  - 6.33GB of memory (75.6% of system memory, in container)
+#18 8.229  - 8 thread(s) (100.0% of 8 available processor(s), determined at start)
+#18 10.63 SLF4J(W): No SLF4J providers were found.
+#18 10.63 SLF4J(W): Defaulting to no-operation (NOP) logger implementation
+#18 10.63 SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.
+#18 38.36 [2/8] Performing analysis...  [*****]                                                                   (29.6s @ 3.14GB)
+#18 38.43    27,611 types,  42,958 fields, and 135,831 methods found reachable
+#18 38.43     9,377 types,   2,721 fields, and  13,434 methods registered for reflection
+#18 38.43        65 types,      71 fields, and      55 methods registered for JNI access
+#18 38.43         0 downcalls and 0 upcalls registered for foreign access
+#18 38.43         4 native libraries: dl, pthread, rt, z
+#18 49.70 [3/8] Building universe...                                                                              (11.3s @ 3.70GB)
+#18 56.17 [4/8] Parsing methods...      [***]                                                                      (6.4s @ 3.66GB)
+#18 61.56 [5/8] Inlining methods...     [****]                                                                     (4.6s @ 4.11GB)
+#18 95.73 [6/8] Compiling methods...    [******]                                                                  (34.1s @ 2.55GB)
+#18 104.4 [7/8] Laying out methods...   [***]                                                                      (8.7s @ 3.51GB)
+#18 111.3 [8/8] Creating image...       [***]                                                                      (5.9s @ 4.24GB)
+#18 111.3   65.75MB (43.85%) for code area:    87,625 compilation units
+#18 111.3   76.22MB (50.83%) for image heap:  541,544 objects and 534 resources
+#18 111.3    7.99MB ( 5.33%) for other data
+#18 111.3  149.96MB in total image size, 142.48MB in total file size
+#18 111.3 ------------------------------------------------------------------------------------------------------------------------
+#18 111.3 Top 10 origins of code area:                                Top 10 object types in image heap:
+#18 111.3   15.63MB java.base                                           21.85MB byte[] for embedded resources
+#18 111.3   13.33MB kafka-clients-4.1.1.jar                             17.94MB byte[] for code metadata
+#18 111.3    4.20MB tomcat-embed-core-11.0.14.jar                        8.30MB byte[] for java.lang.String
+#18 111.3    3.68MB java.xml                                             5.52MB com.oracle.svm.core.hub.DynamicHubCompanion
+#18 111.3    2.36MB svm.jar (Native Image)                               4.96MB java.lang.String
+#18 111.3    1.83MB jackson-databind-3.0.2.jar                           3.95MB java.lang.Class
+#18 111.3    1.66MB postgresql-42.7.8.jar                                1.30MB byte[] for reflection metadata
+#18 111.3    1.63MB prometheus-metrics-exposition-formats-1.4.3.jar      1.01MB c.o.svm.core.hub.DynamicHub$ReflectionMetadata
+#18 111.3    1.62MB spring-core-7.0.1.jar                              955.42kB byte[] for general heap data
+#18 111.3    1.55MB spring-boot-4.0.0.jar                              913.52kB java.lang.String[]
+#18 111.3   17.68MB for 152 more packages                                9.51MB for 5363 more object types
+#18 111.3 ------------------------------------------------------------------------------------------------------------------------
+#18 111.3 Recommendations:
+#18 111.3  FUTR: Use '--future-defaults=all' to prepare for future releases.
+#18 111.3  AWT:  Use the tracing agent to collect metadata for AWT.
+#18 111.3  HEAP: Set max heap for improved and more predictable memory usage.
+#18 111.3  CPU:  Enable more CPU features with '-march=native' for improved performance.
+#18 111.3 ------------------------------------------------------------------------------------------------------------------------
+#18 111.3                        12.6s (11.7% of total time) in 467 GCs | Peak RSS: 6.68GB | CPU load: 6.12
+#18 111.3 ------------------------------------------------------------------------------------------------------------------------
+#18 111.3 Build artifacts:
+#18 111.3  /build/target/libawt.so (jdk_library)
+#18 111.3  /build/target/libawt_headless.so (jdk_library)
+#18 111.3  /build/target/libawt_xawt.so (jdk_library)
+#18 111.3  /build/target/libjava.so (jdk_library_shim)
+#18 111.3  /build/target/libjvm.so (jdk_library_shim)
+#18 111.3  /build/target/libmanagement_ext.so (jdk_library)
+#18 111.3  /build/target/pulsegrid-spring (executable)
+#18 111.3 ========================================================================================================================
+#18 111.3 Finished generating 'pulsegrid-spring' in 1m 46s.
+#18 111.4 [INFO] ------------------------------------------------------------------------
+#18 111.4 [INFO] BUILD SUCCESS
+#18 111.4 [INFO] ------------------------------------------------------------------------
+#18 111.4 [INFO] Total time:  01:50 min
+#18 111.4 [INFO] Finished at: 2026-06-04T00:21:04Z
+#18 111.4 [INFO] ------------------------------------------------------------------------
+#18 DONE 112.9s
+
+#19 [runtime 2/4] WORKDIR /app
+#19 CACHED
+
+#20 [runtime 3/4] RUN apt-get update && apt-get install -y --no-install-recommends curl libstdc++6 zlib1g     && rm -rf /var/lib/apt/lists/*
+#20 CACHED
+
+#21 [runtime 4/4] COPY --from=build /build/target/pulsegrid-spring /app/pulsegrid-spring
+#21 DONE 0.2s
+
+#22 exporting to image
+#22 exporting layers
+#22 exporting layers 3.4s done
+#22 exporting manifest sha256:ff8fb2cc421c8c4524ba33178d7791580d56af915a305504a5a815a4dc7bb6c7
+#22 exporting manifest sha256:ff8fb2cc421c8c4524ba33178d7791580d56af915a305504a5a815a4dc7bb6c7 done
+#22 exporting config sha256:16ed392326d444dd5d1cf6f3d7a3e696917f9ef8146e2f72460955d98ce2b095 done
+#22 exporting attestation manifest sha256:b8131f2ec8c64c88461947378aba9d902dfcc39928ed0ac62e5f40bc7c487838 0.0s done
+#22 exporting manifest list sha256:6127470662b561f3b8cbef83de091938af85673825f6b714902662e922d3b705 0.0s done
+#22 naming to docker.io/pulsegrid/spring-vt-native:latest done
+#22 unpacking to docker.io/pulsegrid/spring-vt-native:latest
+#22 unpacking to docker.io/pulsegrid/spring-vt-native:latest 0.4s done
+#22 DONE 3.9s
+
+#23 resolving provenance for metadata file
+#23 DONE 0.0s
+ Image pulsegrid/spring-vt-native Built 

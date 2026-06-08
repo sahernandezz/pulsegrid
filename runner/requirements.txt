@@ -1,0 +1,6 @@
+# Runner + analysis. The stdlib does most of the work; these are the external deps.
+PyYAML>=6.0          # read variants.yaml
+requests>=2.31       # health polling / time-to-first-request
+# For benchmark/analyze.py and benchmark/plots/ (evidence-pack charts):
+matplotlib>=3.8
+numpy>=1.26

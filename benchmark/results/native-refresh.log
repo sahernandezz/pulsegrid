@@ -1,0 +1,33 @@
+PulseGrid runner · 3 variant(s) · cfg={'runs': 1, 'duration': 20, 'vus': 150, 'warmup_seconds': 12, 'idle_settle': 8, 'startup_timeout': 180, 'skip_build': False, 'keep_infra': False}
+
+=== spring-vt-native · mode http ===
+  [build] spring-vt-native ...
+  [run 1/1] spring-vt-native (http)
+      cold start=545ms  limits={'cpus': 2.0, 'memoryMb': 1073.741824, 'cpuset': '0,1'}
+
+=== spring-vt-native · mode queue ===
+  [build] spring-vt-native ...
+  [run 1/1] spring-vt-native (queue)
+      cold start=352ms  limits={'cpus': 2.0, 'memoryMb': 1073.741824, 'cpuset': '0,1'}
+
+=== quarkus-reactive-native · mode http ===
+  [build] quarkus-reactive-native ...
+  [run 1/1] quarkus-reactive-native (http)
+      cold start=480ms  limits={'cpus': 2.0, 'memoryMb': 1073.741824, 'cpuset': '0,1'}
+
+=== quarkus-reactive-native · mode queue ===
+  [build] quarkus-reactive-native ...
+  [run 1/1] quarkus-reactive-native (queue)
+      cold start=325ms  limits={'cpus': 2.0, 'memoryMb': 1073.741824, 'cpuset': '0,1'}
+
+=== quarkus-imperative-native · mode http ===
+  [build] quarkus-imperative-native ...
+  [run 1/1] quarkus-imperative-native (http)
+      cold start=483ms  limits={'cpus': 2.0, 'memoryMb': 1073.741824, 'cpuset': '0,1'}
+
+=== quarkus-imperative-native · mode queue ===
+  [build] quarkus-imperative-native ...
+  [run 1/1] quarkus-imperative-native (queue)
+      cold start=327ms  limits={'cpus': 2.0, 'memoryMb': 1073.741824, 'cpuset': '0,1'}
+
+✓ Consolidated written to benchmark/results/native-refresh.json

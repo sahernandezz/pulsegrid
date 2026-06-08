@@ -1,0 +1,31 @@
+# =============================================================================
+# VIRTUAL THREADS profile: MVC (Tomcat) + JDBC, with virtual threads enabled.
+# =============================================================================
+spring:
+  threads:
+    virtual:
+      enabled: true            # <-- the heart of this variant (Java 25 VT)
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:pulsegrid}
+    username: ${DB_USER:pulse}
+    password: ${DB_PASSWORD:pulse}
+    hikari:
+      # Under VT, many virtual threads contend for connections: the pool is the real
+      # contention point. Sized explicitly and documented.
+      maximum-pool-size: 64
+      minimum-idle: 8
+      connection-timeout: 10000
+  # Standard (blocking) Kafka client — valid under VT. Used only when queue.
+  kafka:
+    bootstrap-servers: ${pulsegrid.kafka.bootstrap}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      acks: "1"
+    consumer:
+      group-id: pulsegrid-spring-vt
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      auto-offset-reset: earliest
+    listener:
+      missing-topics-fatal: false

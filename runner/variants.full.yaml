@@ -1,0 +1,82 @@
+# =============================================================================
+# PulseGrid · FULL run set — all 8 variants × both ingest modes (16 profiles).
+# Corrected load settings: ~150 VUs is near the saturation knee for this DB-bound
+# workload (measured), so throughput reflects near-capacity instead of being
+# offered-load-limited. JVM variants run with Generational ZGC (compose default).
+# Canonical multi-run methodology (>=3 runs, 30s warm-up) lives in variants.yaml.
+# =============================================================================
+defaults:
+  ingestModes: [http, queue]
+  runs: 1
+  warmupSeconds: 12
+  idleSettleSeconds: 8
+  loadDurationSeconds: 20
+  vus: 150
+  healthPath: /health
+  latencyThresholdMs: 100
+
+variants:
+  - id: spring-vt-jvm
+    label: "Spring Boot 4 · Virtual Threads · JVM"
+    stack: spring-boot-4
+    paradigm: virtual-threads
+    packaging: jvm
+    composeProfile: spring-vt-jvm
+    image: pulsegrid/spring-vt-jvm
+    metricsPath: /actuator/prometheus
+  - id: spring-vt-native
+    label: "Spring Boot 4 · Virtual Threads · Native"
+    stack: spring-boot-4
+    paradigm: virtual-threads
+    packaging: native
+    composeProfile: spring-vt-native
+    image: pulsegrid/spring-vt-native
+    metricsPath: /actuator/prometheus
+  - id: spring-webflux-jvm
+    label: "Spring Boot 4 · WebFlux · JVM"
+    stack: spring-boot-4
+    paradigm: webflux
+    packaging: jvm
+    composeProfile: spring-webflux-jvm
+    image: pulsegrid/spring-webflux-jvm
+    metricsPath: /actuator/prometheus
+  - id: spring-webflux-native
+    label: "Spring Boot 4 · WebFlux · Native"
+    stack: spring-boot-4
+    paradigm: webflux
+    packaging: native
+    composeProfile: spring-webflux-native
+    image: pulsegrid/spring-webflux-native
+    metricsPath: /actuator/prometheus
+  - id: quarkus-reactive-jvm
+    label: "Quarkus · Reactive (Mutiny) · JVM"
+    stack: quarkus
+    paradigm: reactive
+    packaging: jvm
+    composeProfile: quarkus-reactive-jvm
+    image: pulsegrid/quarkus-reactive-jvm
+    metricsPath: /q/metrics
+  - id: quarkus-reactive-native
+    label: "Quarkus · Reactive (Mutiny) · Native"
+    stack: quarkus
+    paradigm: reactive
+    packaging: native
+    composeProfile: quarkus-reactive-native
+    image: pulsegrid/quarkus-reactive-native
+    metricsPath: /q/metrics
+  - id: quarkus-imperative-jvm
+    label: "Quarkus · Imperative (blocking) · JVM"
+    stack: quarkus
+    paradigm: imperative
+    packaging: jvm
+    composeProfile: quarkus-imperative-jvm
+    image: pulsegrid/quarkus-imperative-jvm
+    metricsPath: /q/metrics
+  - id: quarkus-imperative-native
+    label: "Quarkus · Imperative (blocking) · Native"
+    stack: quarkus
+    paradigm: imperative
+    packaging: native
+    composeProfile: quarkus-imperative-native
+    image: pulsegrid/quarkus-imperative-native
+    metricsPath: /q/metrics

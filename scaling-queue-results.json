@@ -1,0 +1,314 @@
+{
+  "generatedAt": "2026-06-04T04:02:28.116371Z",
+  "ingestMode": "queue",
+  "envelopes": [
+    {
+      "label": "1cpu-512m",
+      "cpus": 1,
+      "memory": "512m",
+      "cores": 1
+    },
+    {
+      "label": "2cpu-1g",
+      "cpus": 2,
+      "memory": "1g",
+      "cores": 2
+    },
+    {
+      "label": "4cpu-2g",
+      "cpus": 4,
+      "memory": "2g",
+      "cores": 4
+    }
+  ],
+  "variants": [
+    {
+      "id": "quarkus-reactive-jvm",
+      "label": "Quarkus · Reactive (Mutiny) · JVM",
+      "stack": "quarkus",
+      "paradigm": "reactive",
+      "packaging": "jvm",
+      "points": {
+        "1cpu-512m": {
+          "supported": true,
+          "throughputRps": 6634.2,
+          "p50Ms": 19.47,
+          "p95Ms": 42.37,
+          "p99Ms": 84.95,
+          "p999Ms": 224.08,
+          "startupMs": 2916.32,
+          "idleRssMb": 268.65,
+          "imageSizeMb": 150.8,
+          "efficiencyRpsPerMb": 23.39,
+          "errorPct": 0
+        },
+        "2cpu-1g": {
+          "supported": true,
+          "throughputRps": 19177.3,
+          "p50Ms": 4.63,
+          "p95Ms": 13.76,
+          "p99Ms": 200.89,
+          "p999Ms": 212.51,
+          "startupMs": 1274.3,
+          "idleRssMb": 278.82,
+          "imageSizeMb": 150.8,
+          "efficiencyRpsPerMb": 62.04,
+          "errorPct": 0
+        },
+        "4cpu-2g": {
+          "supported": true,
+          "throughputRps": 24241.3,
+          "p50Ms": 2.51,
+          "p95Ms": 8.0,
+          "p99Ms": 202.63,
+          "p999Ms": 209.62,
+          "startupMs": 1113.58,
+          "idleRssMb": 335.54,
+          "imageSizeMb": 150.8,
+          "efficiencyRpsPerMb": 53.34,
+          "errorPct": 0
+        }
+      }
+    },
+    {
+      "id": "quarkus-reactive-native",
+      "label": "Quarkus · Reactive (Mutiny) · Native",
+      "stack": "quarkus",
+      "paradigm": "reactive",
+      "packaging": "native",
+      "points": {
+        "1cpu-512m": {
+          "supported": true,
+          "throughputRps": 9016.6,
+          "p50Ms": 15.24,
+          "p95Ms": 26.54,
+          "p99Ms": 37.46,
+          "p999Ms": 217.15,
+          "startupMs": 508.79,
+          "idleRssMb": 154.66,
+          "imageSizeMb": 60.6,
+          "efficiencyRpsPerMb": 58.93,
+          "errorPct": 0
+        },
+        "2cpu-1g": {
+          "supported": true,
+          "throughputRps": 17796.1,
+          "p50Ms": 6.56,
+          "p95Ms": 14.8,
+          "p99Ms": 24.92,
+          "p999Ms": 212.6,
+          "startupMs": 340.91,
+          "idleRssMb": 76.26,
+          "imageSizeMb": 60.6,
+          "efficiencyRpsPerMb": 217.56,
+          "errorPct": 0
+        },
+        "4cpu-2g": {
+          "supported": true,
+          "throughputRps": 21223.8,
+          "p50Ms": 3.75,
+          "p95Ms": 9.75,
+          "p99Ms": 203.09,
+          "p999Ms": 209.85,
+          "startupMs": 332.55,
+          "idleRssMb": 156.97,
+          "imageSizeMb": 60.6,
+          "efficiencyRpsPerMb": 124.92,
+          "errorPct": 0
+        }
+      }
+    },
+    {
+      "id": "quarkus-imperative-native",
+      "label": "Quarkus · Imperative (blocking) · Native",
+      "stack": "quarkus",
+      "paradigm": "imperative",
+      "packaging": "native",
+      "points": {
+        "1cpu-512m": {
+          "supported": true,
+          "throughputRps": 5112.4,
+          "p50Ms": 26.37,
+          "p95Ms": 52.3,
+          "p99Ms": 72.31,
+          "p999Ms": 231.53,
+          "startupMs": 591.73,
+          "idleRssMb": 187.38,
+          "imageSizeMb": 69.6,
+          "efficiencyRpsPerMb": 16.63,
+          "errorPct": 0
+        },
+        "2cpu-1g": {
+          "supported": true,
+          "throughputRps": 14333.9,
+          "p50Ms": 8.11,
+          "p95Ms": 20.82,
+          "p99Ms": 32.07,
+          "p999Ms": 212.66,
+          "startupMs": 331.87,
+          "idleRssMb": 185.28,
+          "imageSizeMb": 69.6,
+          "efficiencyRpsPerMb": 48.99,
+          "errorPct": 0
+        },
+        "4cpu-2g": {
+          "supported": true,
+          "throughputRps": 20403.5,
+          "p50Ms": 3.62,
+          "p95Ms": 15.55,
+          "p99Ms": 201.61,
+          "p999Ms": 221.06,
+          "startupMs": 322.42,
+          "idleRssMb": 183.5,
+          "imageSizeMb": 69.6,
+          "efficiencyRpsPerMb": 79.42,
+          "errorPct": 0
+        }
+      }
+    },
+    {
+      "id": "quarkus-imperative-jvm",
+      "label": "Quarkus · Imperative (blocking) · JVM",
+      "stack": "quarkus",
+      "paradigm": "imperative",
+      "packaging": "jvm",
+      "points": {
+        "1cpu-512m": {
+          "supported": true,
+          "throughputRps": 2672.6,
+          "p50Ms": 50.36,
+          "p95Ms": 96.42,
+          "p99Ms": 135.91,
+          "p999Ms": 1052.23,
+          "startupMs": 3803.39,
+          "idleRssMb": 369.94,
+          "imageSizeMb": 170.1,
+          "efficiencyRpsPerMb": 5.77,
+          "errorPct": 0
+        },
+        "2cpu-1g": {
+          "supported": true,
+          "throughputRps": 12033.3,
+          "p50Ms": 9.14,
+          "p95Ms": 25.56,
+          "p99Ms": 61.11,
+          "p999Ms": 223.33,
+          "startupMs": 1581.61,
+          "idleRssMb": 307.55,
+          "imageSizeMb": 170.1,
+          "efficiencyRpsPerMb": 26.63,
+          "errorPct": 0
+        },
+        "4cpu-2g": {
+          "supported": true,
+          "throughputRps": 19529.1,
+          "p50Ms": 3.1,
+          "p95Ms": 16.19,
+          "p99Ms": 202.89,
+          "p999Ms": 222.64,
+          "startupMs": 1443.51,
+          "idleRssMb": 398.88,
+          "imageSizeMb": 170.1,
+          "efficiencyRpsPerMb": 31.87,
+          "errorPct": 0
+        }
+      }
+    },
+    {
+      "id": "spring-vt-jvm",
+      "label": "Spring Boot 4 · Virtual Threads · JVM",
+      "stack": "spring-boot-4",
+      "paradigm": "virtual-threads",
+      "packaging": "jvm",
+      "points": {
+        "1cpu-512m": {
+          "supported": true,
+          "throughputRps": 1939.9,
+          "p50Ms": 28.08,
+          "p95Ms": 201.82,
+          "p99Ms": 1151.12,
+          "p999Ms": 3107.31,
+          "startupMs": 5976.41,
+          "idleRssMb": 345.93,
+          "imageSizeMb": 165.4,
+          "efficiencyRpsPerMb": 5.08,
+          "errorPct": 0
+        },
+        "2cpu-1g": {
+          "supported": true,
+          "throughputRps": 5161.0,
+          "p50Ms": 14.47,
+          "p95Ms": 81.23,
+          "p99Ms": 362.44,
+          "p999Ms": 875.22,
+          "startupMs": 2824.8,
+          "idleRssMb": 357.35,
+          "imageSizeMb": 165.4,
+          "efficiencyRpsPerMb": 10.5,
+          "errorPct": 0
+        },
+        "4cpu-2g": {
+          "supported": true,
+          "throughputRps": 16100.6,
+          "p50Ms": 2.51,
+          "p95Ms": 20.87,
+          "p99Ms": 202.51,
+          "p999Ms": 241.72,
+          "startupMs": 1737.1,
+          "idleRssMb": 456.45,
+          "imageSizeMb": 165.4,
+          "efficiencyRpsPerMb": 27.16,
+          "errorPct": 0
+        }
+      }
+    },
+    {
+      "id": "spring-webflux-jvm",
+      "label": "Spring Boot 4 · WebFlux · JVM",
+      "stack": "spring-boot-4",
+      "paradigm": "webflux",
+      "packaging": "jvm",
+      "points": {
+        "1cpu-512m": {
+          "supported": true,
+          "throughputRps": 2178.4,
+          "p50Ms": 57.4,
+          "p95Ms": 130.29,
+          "p99Ms": 212.3,
+          "p999Ms": 1823.33,
+          "startupMs": 6840.97,
+          "idleRssMb": 256.48,
+          "imageSizeMb": 188.8,
+          "efficiencyRpsPerMb": 6.8,
+          "errorPct": 0
+        },
+        "2cpu-1g": {
+          "supported": true,
+          "throughputRps": 9454.9,
+          "p50Ms": 10.78,
+          "p95Ms": 31.53,
+          "p99Ms": 204.69,
+          "p999Ms": 226.48,
+          "startupMs": 2790.62,
+          "idleRssMb": 247.57,
+          "imageSizeMb": 188.8,
+          "efficiencyRpsPerMb": 18.15,
+          "errorPct": 0
+        },
+        "4cpu-2g": {
+          "supported": true,
+          "throughputRps": 15663.5,
+          "p50Ms": 5.34,
+          "p95Ms": 12.5,
+          "p99Ms": 205.51,
+          "p999Ms": 214.51,
+          "startupMs": 2036.64,
+          "idleRssMb": 354.73,
+          "imageSizeMb": 188.8,
+          "efficiencyRpsPerMb": 25.92,
+          "errorPct": 0
+        }
+      }
+    }
+  ]
+}

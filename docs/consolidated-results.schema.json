@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://pulsegrid/docs/consolidated-results.schema.json",
+  "title": "PulseGrid consolidated results",
+  "description": "Contract between the Benchmark Runner (producer) and the React frontend (consumer).",
+  "type": "object",
+  "required": ["generatedAt", "environment", "variants"],
+  "properties": {
+    "sample": { "type": "boolean", "description": "true => illustrative data, not measured." },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "environment": {
+      "type": "object",
+      "required": ["cpu", "cores", "ramGb", "os", "java", "containerLimits"],
+      "properties": {
+        "cpu": { "type": "string" },
+        "cores": { "type": "integer" },
+        "ramGb": { "type": "number" },
+        "os": { "type": "string" },
+        "java": { "type": "string" },
+        "graalvm": { "type": "string" },
+        "springBoot": { "type": "string" },
+        "quarkus": { "type": "string" },
+        "containerLimits": {
+          "type": "object",
+          "required": ["cpus", "memory"],
+          "properties": {
+            "cpus": { "type": "number" },
+            "memory": { "type": "string" },
+            "cpuset": { "type": "string" }
+          }
+        }
+      }
+    },
+    "variants": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "stack", "paradigm", "packaging", "ingestMode", "supported"],
+        "properties": {
+          "id": { "type": "string" },
+          "label": { "type": "string" },
+          "stack": { "type": "string", "enum": ["spring-boot-4", "quarkus"] },
+          "paradigm": { "type": "string", "enum": ["virtual-threads", "webflux", "reactive", "imperative"] },
+          "packaging": { "type": "string", "enum": ["jvm", "native"] },
+          "ingestMode": { "type": "string", "enum": ["http", "queue"] },
+          "supported": { "type": "boolean" },
+          "notes": { "type": "string" },
+          "metrics": {
+            "oneOf": [
+              { "type": "null" },
+              {
+                "type": "object",
+                "properties": {
+                  "throughputRps": { "$ref": "#/$defs/statRuns" },
+                  "latencyMs": {
+                    "type": "object",
+                    "properties": {
+                      "p50": { "type": "number" }, "p95": { "type": "number" },
+                      "p99": { "type": "number" }, "p999": { "type": "number" }
+                    }
+                  },
+                  "errorRatePct": { "$ref": "#/$defs/stat" },
+                  "startupMs": { "$ref": "#/$defs/statRuns" },
+                  "timeToFirstReqMs": { "$ref": "#/$defs/stat" },
+                  "warmupToStableMs": { "$ref": "#/$defs/stat" },
+                  "idleRssMb": { "$ref": "#/$defs/statRuns" },
+                  "underLoadRssMb": { "$ref": "#/$defs/stat" },
+                  "underLoadCpuPct": { "$ref": "#/$defs/stat" },
+                  "imageSizeMb": { "type": "object", "properties": { "value": { "type": "number" } } },
+                  "efficiency": {
+                    "type": "object",
+                    "properties": {
+                      "rpsPerMb": { "type": "number" },
+                      "rpsPerCpuPct": { "type": "number" }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "stat": { "type": "object", "required": ["median"], "properties": { "median": { "type": "number" } } },
+    "statRuns": {
+      "type": "object",
+      "required": ["median"],
+      "properties": {
+        "median": { "type": "number" },
+        "stddev": { "type": "number" },
+        "runs": { "type": "array", "items": { "type": "number" } }
+      }
+    }
+  }
+}

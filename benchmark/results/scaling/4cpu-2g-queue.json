@@ -1,0 +1,387 @@
+{
+  "generatedAt": "2026-06-04T03:58:37.131207Z",
+  "sample": false,
+  "environment": {
+    "cpu": "Apple M3",
+    "cores": 8,
+    "ramGb": 17.2,
+    "os": "macOS 26.5",
+    "java": "openjdk version 25.0.3 2026-04-21 LTS",
+    "graalvm": "",
+    "springBoot": "4.0.0",
+    "quarkus": "3.17.5",
+    "containerLimits": {
+      "cpus": 4,
+      "memory": "2g",
+      "cpuset": "0,1,2,3"
+    }
+  },
+  "variants": [
+    {
+      "id": "spring-vt-jvm",
+      "label": "Spring Boot 4 · Virtual Threads · JVM",
+      "stack": "spring-boot-4",
+      "paradigm": "virtual-threads",
+      "packaging": "jvm",
+      "ingestMode": "queue",
+      "supported": true,
+      "notes": "",
+      "metrics": {
+        "throughputRps": {
+          "median": 16100.6,
+          "stddev": 0.0,
+          "runs": [
+            16100.6
+          ]
+        },
+        "latencyMs": {
+          "p50": 2.51,
+          "p95": 20.87,
+          "p99": 202.51,
+          "p999": 241.72
+        },
+        "errorRatePct": {
+          "median": 0
+        },
+        "startupMs": {
+          "median": 1737.1,
+          "stddev": 0.0,
+          "runs": [
+            1737.1
+          ]
+        },
+        "timeToFirstReqMs": {
+          "median": 2074.88
+        },
+        "warmupToStableMs": {
+          "median": 890.6
+        },
+        "idleRssMb": {
+          "median": 456.45,
+          "stddev": 0.0,
+          "runs": [
+            456.45
+          ]
+        },
+        "underLoadRssMb": {
+          "median": 592.8
+        },
+        "underLoadCpuPct": {
+          "median": 318.2
+        },
+        "imageSizeMb": {
+          "value": 165.4
+        },
+        "efficiency": {
+          "rpsPerMb": 27.16,
+          "rpsPerCpuPct": 50.6
+        }
+      }
+    },
+    {
+      "id": "spring-webflux-jvm",
+      "label": "Spring Boot 4 · WebFlux · JVM",
+      "stack": "spring-boot-4",
+      "paradigm": "webflux",
+      "packaging": "jvm",
+      "ingestMode": "queue",
+      "supported": true,
+      "notes": "",
+      "metrics": {
+        "throughputRps": {
+          "median": 15663.5,
+          "stddev": 0.0,
+          "runs": [
+            15663.5
+          ]
+        },
+        "latencyMs": {
+          "p50": 5.34,
+          "p95": 12.5,
+          "p99": 205.51,
+          "p999": 214.51
+        },
+        "errorRatePct": {
+          "median": 0
+        },
+        "startupMs": {
+          "median": 2036.64,
+          "stddev": 0.0,
+          "runs": [
+            2036.64
+          ]
+        },
+        "timeToFirstReqMs": {
+          "median": 2204.19
+        },
+        "warmupToStableMs": {
+          "median": 1147.79
+        },
+        "idleRssMb": {
+          "median": 354.73,
+          "stddev": 0.0,
+          "runs": [
+            354.73
+          ]
+        },
+        "underLoadRssMb": {
+          "median": 604.3
+        },
+        "underLoadCpuPct": {
+          "median": 207.1
+        },
+        "imageSizeMb": {
+          "value": 188.8
+        },
+        "efficiency": {
+          "rpsPerMb": 25.92,
+          "rpsPerCpuPct": 75.63
+        }
+      }
+    },
+    {
+      "id": "quarkus-reactive-jvm",
+      "label": "Quarkus · Reactive (Mutiny) · JVM",
+      "stack": "quarkus",
+      "paradigm": "reactive",
+      "packaging": "jvm",
+      "ingestMode": "queue",
+      "supported": true,
+      "notes": "",
+      "metrics": {
+        "throughputRps": {
+          "median": 24241.3,
+          "stddev": 0.0,
+          "runs": [
+            24241.3
+          ]
+        },
+        "latencyMs": {
+          "p50": 2.51,
+          "p95": 8.0,
+          "p99": 202.63,
+          "p999": 209.62
+        },
+        "errorRatePct": {
+          "median": 0
+        },
+        "startupMs": {
+          "median": 1113.58,
+          "stddev": 0.0,
+          "runs": [
+            1113.58
+          ]
+        },
+        "timeToFirstReqMs": {
+          "median": 1246.15
+        },
+        "warmupToStableMs": {
+          "median": 878.06
+        },
+        "idleRssMb": {
+          "median": 335.54,
+          "stddev": 0.0,
+          "runs": [
+            335.54
+          ]
+        },
+        "underLoadRssMb": {
+          "median": 454.5
+        },
+        "underLoadCpuPct": {
+          "median": 196.4
+        },
+        "imageSizeMb": {
+          "value": 150.8
+        },
+        "efficiency": {
+          "rpsPerMb": 53.34,
+          "rpsPerCpuPct": 123.43
+        }
+      }
+    },
+    {
+      "id": "quarkus-reactive-native",
+      "label": "Quarkus · Reactive (Mutiny) · Native",
+      "stack": "quarkus",
+      "paradigm": "reactive",
+      "packaging": "native",
+      "ingestMode": "queue",
+      "supported": true,
+      "notes": "",
+      "metrics": {
+        "throughputRps": {
+          "median": 21223.8,
+          "stddev": 0.0,
+          "runs": [
+            21223.8
+          ]
+        },
+        "latencyMs": {
+          "p50": 3.75,
+          "p95": 9.75,
+          "p99": 203.09,
+          "p999": 209.85
+        },
+        "errorRatePct": {
+          "median": 0
+        },
+        "startupMs": {
+          "median": 332.55,
+          "stddev": 0.0,
+          "runs": [
+            332.55
+          ]
+        },
+        "timeToFirstReqMs": {
+          "median": 406.95
+        },
+        "warmupToStableMs": {
+          "median": 1467.21
+        },
+        "idleRssMb": {
+          "median": 156.97,
+          "stddev": 0.0,
+          "runs": [
+            156.97
+          ]
+        },
+        "underLoadRssMb": {
+          "median": 169.9
+        },
+        "underLoadCpuPct": {
+          "median": 213.6
+        },
+        "imageSizeMb": {
+          "value": 60.6
+        },
+        "efficiency": {
+          "rpsPerMb": 124.92,
+          "rpsPerCpuPct": 99.36
+        }
+      }
+    },
+    {
+      "id": "quarkus-imperative-jvm",
+      "label": "Quarkus · Imperative (blocking) · JVM",
+      "stack": "quarkus",
+      "paradigm": "imperative",
+      "packaging": "jvm",
+      "ingestMode": "queue",
+      "supported": true,
+      "notes": "",
+      "metrics": {
+        "throughputRps": {
+          "median": 19529.1,
+          "stddev": 0.0,
+          "runs": [
+            19529.1
+          ]
+        },
+        "latencyMs": {
+          "p50": 3.1,
+          "p95": 16.19,
+          "p99": 202.89,
+          "p999": 222.64
+        },
+        "errorRatePct": {
+          "median": 0
+        },
+        "startupMs": {
+          "median": 1443.51,
+          "stddev": 0.0,
+          "runs": [
+            1443.51
+          ]
+        },
+        "timeToFirstReqMs": {
+          "median": 1572.73
+        },
+        "warmupToStableMs": {
+          "median": 842.93
+        },
+        "idleRssMb": {
+          "median": 398.88,
+          "stddev": 0.0,
+          "runs": [
+            398.88
+          ]
+        },
+        "underLoadRssMb": {
+          "median": 612.7
+        },
+        "underLoadCpuPct": {
+          "median": 338.9
+        },
+        "imageSizeMb": {
+          "value": 170.1
+        },
+        "efficiency": {
+          "rpsPerMb": 31.87,
+          "rpsPerCpuPct": 57.62
+        }
+      }
+    },
+    {
+      "id": "quarkus-imperative-native",
+      "label": "Quarkus · Imperative (blocking) · Native",
+      "stack": "quarkus",
+      "paradigm": "imperative",
+      "packaging": "native",
+      "ingestMode": "queue",
+      "supported": true,
+      "notes": "",
+      "metrics": {
+        "throughputRps": {
+          "median": 20403.5,
+          "stddev": 0.0,
+          "runs": [
+            20403.5
+          ]
+        },
+        "latencyMs": {
+          "p50": 3.62,
+          "p95": 15.55,
+          "p99": 201.61,
+          "p999": 221.06
+        },
+        "errorRatePct": {
+          "median": 0
+        },
+        "startupMs": {
+          "median": 322.42,
+          "stddev": 0.0,
+          "runs": [
+            322.42
+          ]
+        },
+        "timeToFirstReqMs": {
+          "median": 384.46
+        },
+        "warmupToStableMs": {
+          "median": 381.55
+        },
+        "idleRssMb": {
+          "median": 183.5,
+          "stddev": 0.0,
+          "runs": [
+            183.5
+          ]
+        },
+        "underLoadRssMb": {
+          "median": 256.9
+        },
+        "underLoadCpuPct": {
+          "median": 325.5
+        },
+        "imageSizeMb": {
+          "value": 69.6
+        },
+        "efficiency": {
+          "rpsPerMb": 79.42,
+          "rpsPerCpuPct": 62.68
+        }
+      }
+    }
+  ]
+}

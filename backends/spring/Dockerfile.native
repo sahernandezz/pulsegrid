@@ -1,0 +1,41 @@
+# syntax=docker/dockerfile:1.7
+# =============================================================================
+# PulseGrid · Spring Boot 4 · NATIVE packaging (GraalVM)
+# Parametrized by PARADIGM (virtual-threads | webflux).
+#
+# KNOWN RISK (see docs/architecture/RISKS.md): webflux+native is the highest build
+# risk (Reactor/serialization AOT hints). If it does not converge after reasonable
+# effort, it is documented and marked "supported": false in the consolidated file —
+# no fabricated data.
+#
+# NOTE: the GraalVM image tag may need adjusting for Java 25 availability
+# (ghcr.io/graalvm/native-image-community:25[-ol9|-muslib]).
+# =============================================================================
+ARG PARADIGM=virtual-threads
+
+# --- build stage (GraalVM native-image + Maven) ------------------------------
+FROM ghcr.io/graalvm/native-image-community:25 AS build
+ARG PARADIGM
+COPY --from=maven:3.9.9-eclipse-temurin-21 /usr/share/maven /usr/share/maven
+RUN ln -sf /usr/share/maven/bin/mvn /usr/local/bin/mvn
+WORKDIR /build
+COPY pom.xml .
+COPY src ./src
+# -P<paradigm>,native  -> Spring Boot AOT + GraalVM native compilation.
+RUN --mount=type=cache,target=/root/.m2 \
+    PROFILE="$([ "$PARADIGM" = "webflux" ] && echo webflux || echo vt)"; \
+    echo "Building Spring paradigm=$PARADIGM (profile=$PROFILE) packaging=native"; \
+    mvn -B -ntp -P"$PROFILE",native -DskipTests clean package
+
+# --- runtime stage (native binary, no JVM) -----------------------------------
+FROM debian:bookworm-slim AS runtime
+ARG PARADIGM
+ENV PG_PARADIGM=${PARADIGM}
+WORKDIR /app
+# The native binary links glibc/libstdc++/zlib; curl for the healthcheck.
+RUN apt-get update && apt-get install -y --no-install-recommends curl libstdc++6 zlib1g \
+    && rm -rf /var/lib/apt/lists/*
+COPY --from=build /build/target/pulsegrid-spring /app/pulsegrid-spring
+EXPOSE 8080
+# No JAVA_OPTS: native is not a JVM; it manages memory differently (documented).
+ENTRYPOINT ["sh", "-c", "exec /app/pulsegrid-spring --spring.profiles.active=$([ \"$PG_PARADIGM\" = webflux ] && echo webflux || echo vt)"]

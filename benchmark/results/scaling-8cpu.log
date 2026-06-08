@@ -1,0 +1,31 @@
+PulseGrid runner · 7 variant(s) · cfg={'runs': 1, 'duration': 20, 'vus': 150, 'warmup_seconds': 12, 'idle_settle': 8, 'startup_timeout': 180, 'skip_build': True, 'keep_infra': False}
+
+=== spring-vt-jvm · mode http ===
+  [run 1/1] spring-vt-jvm (http)
+      cold start=2498ms  limits={'cpus': 8.0, 'memoryMb': 4294.967296, 'cpuset': '0,1,2,3,4,5,6,7'}
+
+=== spring-vt-native · mode http ===
+  [run 1/1] spring-vt-native (http)
+      cold start=432ms  limits={'cpus': 8.0, 'memoryMb': 4294.967296, 'cpuset': '0,1,2,3,4,5,6,7'}
+
+=== spring-webflux-jvm · mode http ===
+  [run 1/1] spring-webflux-jvm (http)
+      cold start=2370ms  limits={'cpus': 8.0, 'memoryMb': 4294.967296, 'cpuset': '0,1,2,3,4,5,6,7'}
+
+=== quarkus-reactive-jvm · mode http ===
+  [run 1/1] quarkus-reactive-jvm (http)
+      cold start=1266ms  limits={'cpus': 8.0, 'memoryMb': 4294.967296, 'cpuset': '0,1,2,3,4,5,6,7'}
+
+=== quarkus-reactive-native · mode http ===
+  [run 1/1] quarkus-reactive-native (http)
+      cold start=332ms  limits={'cpus': 8.0, 'memoryMb': 4294.967296, 'cpuset': '0,1,2,3,4,5,6,7'}
+
+=== quarkus-imperative-jvm · mode http ===
+  [run 1/1] quarkus-imperative-jvm (http)
+      cold start=1780ms  limits={'cpus': 8.0, 'memoryMb': 4294.967296, 'cpuset': '0,1,2,3,4,5,6,7'}
+
+=== quarkus-imperative-native · mode http ===
+  [run 1/1] quarkus-imperative-native (http)
+      cold start=500ms  limits={'cpus': 8.0, 'memoryMb': 4294.967296, 'cpuset': '0,1,2,3,4,5,6,7'}
+
+✓ Consolidated written to benchmark/results/scaling/8cpu-4g.json

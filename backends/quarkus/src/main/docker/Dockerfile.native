@@ -1,0 +1,37 @@
+# syntax=docker/dockerfile:1.7
+# =============================================================================
+# PulseGrid · Quarkus · NATIVE packaging (GraalVM)
+# Parametrized by PARADIGM (reactive | imperative).
+# Build context = backends/quarkus (set by docker-compose).
+#
+# NOTE: the GraalVM image tag may need adjusting for the toolchain in use
+# (ghcr.io/graalvm/native-image-community:21, or a Mandrel builder, which is
+# what Quarkus officially recommends for native builds).
+# =============================================================================
+ARG PARADIGM=reactive
+
+# --- build stage (GraalVM native-image + Maven) ------------------------------
+FROM ghcr.io/graalvm/native-image-community:21 AS build
+ARG PARADIGM
+COPY --from=maven:3.9.9-eclipse-temurin-21 /usr/share/maven /usr/share/maven
+RUN ln -sf /usr/share/maven/bin/mvn /usr/local/bin/mvn
+WORKDIR /build
+COPY pom.xml .
+COPY src ./src
+# -P<paradigm> selects the source set; -Dnative triggers the Quarkus native build.
+RUN --mount=type=cache,target=/root/.m2 \
+    PROFILE="$([ "$PARADIGM" = "imperative" ] && echo imperative || echo reactive)"; \
+    echo "Building Quarkus paradigm=$PARADIGM (profile=$PROFILE) packaging=native"; \
+    mvn -B -ntp -P"$PROFILE" -Dnative -DskipTests package
+
+# --- runtime stage (native binary, no JVM) -----------------------------------
+FROM debian:bookworm-slim AS runtime
+ARG PARADIGM
+ENV PG_PARADIGM=${PARADIGM}
+WORKDIR /app
+RUN apt-get update && apt-get install -y --no-install-recommends curl libstdc++6 zlib1g \
+    && rm -rf /var/lib/apt/lists/*
+COPY --from=build /build/target/pulsegrid-quarkus-runner /app/pulsegrid-quarkus
+EXPOSE 8080
+# No JAVA_OPTS: native is not a JVM. quarkus.profile selects the datasource.
+ENTRYPOINT ["sh", "-c", "exec /app/pulsegrid-quarkus -Dquarkus.profile=$([ \"$PG_PARADIGM\" = imperative ] && echo imperative || echo reactive)"]

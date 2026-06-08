@@ -1,0 +1,847 @@
+{
+  "generatedAt": "2026-06-03T19:59:22.331442Z",
+  "sample": false,
+  "environment": {
+    "cpu": "Apple M3",
+    "cores": 8,
+    "ramGb": 17.2,
+    "os": "macOS 26.5",
+    "java": "openjdk version 25.0.3 2026-04-21 LTS",
+    "graalvm": "",
+    "springBoot": "4.0.0",
+    "quarkus": "3.17.5",
+    "containerLimits": {
+      "cpus": 2,
+      "memory": "1g",
+      "cpuset": "0,1"
+    }
+  },
+  "variants": [
+    {
+      "id": "spring-vt-jvm",
+      "label": "Spring Boot 4 · Virtual Threads · JVM",
+      "stack": "spring-boot-4",
+      "paradigm": "virtual-threads",
+      "packaging": "jvm",
+      "ingestMode": "http",
+      "supported": true,
+      "notes": "",
+      "metrics": {
+        "throughputRps": {
+          "median": 8553.9,
+          "stddev": 0.0,
+          "runs": [
+            8553.9
+          ]
+        },
+        "latencyMs": {
+          "p50": 13.9,
+          "p95": 36.27,
+          "p99": 94.15,
+          "p999": 258.8
+        },
+        "errorRatePct": {
+          "median": 0
+        },
+        "startupMs": {
+          "median": 1981.77,
+          "stddev": 0.0,
+          "runs": [
+            1981.77
+          ]
+        },
+        "timeToFirstReqMs": {
+          "median": 2190.37
+        },
+        "warmupToStableMs": {
+          "median": 1203.48
+        },
+        "idleRssMb": {
+          "median": 329.88,
+          "stddev": 0.0,
+          "runs": [
+            329.88
+          ]
+        },
+        "underLoadRssMb": {
+          "median": 564.3
+        },
+        "underLoadCpuPct": {
+          "median": 179.9
+        },
+        "imageSizeMb": {
+          "value": 165.4
+        },
+        "efficiency": {
+          "rpsPerMb": 15.16,
+          "rpsPerCpuPct": 47.55
+        }
+      }
+    },
+    {
+      "id": "spring-vt-jvm",
+      "label": "Spring Boot 4 · Virtual Threads · JVM",
+      "stack": "spring-boot-4",
+      "paradigm": "virtual-threads",
+      "packaging": "jvm",
+      "ingestMode": "queue",
+      "supported": true,
+      "notes": "",
+      "metrics": {
+        "throughputRps": {
+          "median": 11445.8,
+          "stddev": 0.0,
+          "runs": [
+            11445.8
+          ]
+        },
+        "latencyMs": {
+          "p50": 6.97,
+          "p95": 29.92,
+          "p99": 158.1,
+          "p999": 467.42
+        },
+        "errorRatePct": {
+          "median": 0
+        },
+        "startupMs": {
+          "median": 2143.87,
+          "stddev": 0.0,
+          "runs": [
+            2143.87
+          ]
+        },
+        "timeToFirstReqMs": {
+          "median": 2544.33
+        },
+        "warmupToStableMs": {
+          "median": 1027.92
+        },
+        "idleRssMb": {
+          "median": 269.69,
+          "stddev": 0.0,
+          "runs": [
+            269.69
+          ]
+        },
+        "underLoadRssMb": {
+          "median": 465.8
+        },
+        "underLoadCpuPct": {
+          "median": 182.4
+        },
+        "imageSizeMb": {
+          "value": 165.4
+        },
+        "efficiency": {
+          "rpsPerMb": 24.57,
+          "rpsPerCpuPct": 62.75
+        }
+      }
+    },
+    {
+      "id": "spring-vt-native",
+      "label": "Spring Boot 4 · Virtual Threads · Native",
+      "stack": "spring-boot-4",
+      "paradigm": "virtual-threads",
+      "packaging": "native",
+      "ingestMode": "http",
+      "supported": true,
+      "notes": "Re-measured at 2 CPU / 1 GB after the native response-serialization fix (@RegisterForReflection / @RegisterReflectionForBinding). Earlier native http/queue numbers were the HTTP-500 rate, masked by a 99% error threshold.",
+      "metrics": {
+        "throughputRps": {
+          "median": 7081.6,
+          "stddev": 0.0,
+          "runs": [
+            7081.6
+          ]
+        },
+        "latencyMs": {
+          "p50": 17.64,
+          "p95": 44.11,
+          "p99": 70.04,
+          "p999": 235.06
+        },
+        "errorRatePct": {
+          "median": 0
+        },
+        "startupMs": {
+          "median": 392.86,
+          "stddev": 0.0,
+          "runs": [
+            392.86
+          ]
+        },
+        "timeToFirstReqMs": {
+          "median": 474.15
+        },
+        "warmupToStableMs": {
+          "median": 548.51
+        },
+        "idleRssMb": {
+          "median": 113.04,
+          "stddev": 0.0,
+          "runs": [
+            113.04
+          ]
+        },
+        "underLoadRssMb": {
+          "median": 223.8
+        },
+        "underLoadCpuPct": {
+          "median": 180.8
+        },
+        "imageSizeMb": {
+          "value": 84.9
+        },
+        "efficiency": {
+          "rpsPerMb": 31.64,
+          "rpsPerCpuPct": 39.17
+        }
+      }
+    },
+    {
+      "id": "spring-vt-native",
+      "label": "Spring Boot 4 · Virtual Threads · Native",
+      "stack": "spring-boot-4",
+      "paradigm": "virtual-threads",
+      "packaging": "native",
+      "ingestMode": "queue",
+      "supported": false,
+      "notes": "Native queue is now supported in code. The queue beans were @ConditionalOnProperty, which Spring AOT freezes at build time — the http-built native image pruned them. They are now always present and lazy, and the consumer's @KafkaListener auto-starts only when ingest-mode=queue (SpEL, resolved at runtime), so one binary serves both modes like Quarkus. JVM-verified; this flag stays false until re-measured on a GraalVM host (no fabricated throughput). See docs/architecture/RISKS.md (R1b).",
+      "metrics": null
+    },
+    {
+      "id": "spring-webflux-jvm",
+      "label": "Spring Boot 4 · WebFlux · JVM",
+      "stack": "spring-boot-4",
+      "paradigm": "webflux",
+      "packaging": "jvm",
+      "ingestMode": "http",
+      "supported": true,
+      "notes": "",
+      "metrics": {
+        "throughputRps": {
+          "median": 6820.2,
+          "stddev": 0.0,
+          "runs": [
+            6820.2
+          ]
+        },
+        "latencyMs": {
+          "p50": 17.94,
+          "p95": 44.56,
+          "p99": 72.6,
+          "p999": 215.3
+        },
+        "errorRatePct": {
+          "median": 0
+        },
+        "startupMs": {
+          "median": 2179.6,
+          "stddev": 0.0,
+          "runs": [
+            2179.6
+          ]
+        },
+        "timeToFirstReqMs": {
+          "median": 2485.26
+        },
+        "warmupToStableMs": {
+          "median": 1659.17
+        },
+        "idleRssMb": {
+          "median": 305.76,
+          "stddev": 0.0,
+          "runs": [
+            305.76
+          ]
+        },
+        "underLoadRssMb": {
+          "median": 982.4
+        },
+        "underLoadCpuPct": {
+          "median": 178.2
+        },
+        "imageSizeMb": {
+          "value": 188.8
+        },
+        "efficiency": {
+          "rpsPerMb": 6.94,
+          "rpsPerCpuPct": 38.27
+        }
+      }
+    },
+    {
+      "id": "spring-webflux-jvm",
+      "label": "Spring Boot 4 · WebFlux · JVM",
+      "stack": "spring-boot-4",
+      "paradigm": "webflux",
+      "packaging": "jvm",
+      "ingestMode": "queue",
+      "supported": true,
+      "notes": "",
+      "metrics": {
+        "throughputRps": {
+          "median": 12519.5,
+          "stddev": 0.0,
+          "runs": [
+            12519.5
+          ]
+        },
+        "latencyMs": {
+          "p50": 8.38,
+          "p95": 23.58,
+          "p99": 45.63,
+          "p999": 217.71
+        },
+        "errorRatePct": {
+          "median": 0
+        },
+        "startupMs": {
+          "median": 2464.38,
+          "stddev": 0.0,
+          "runs": [
+            2464.38
+          ]
+        },
+        "timeToFirstReqMs": {
+          "median": 2666.91
+        },
+        "warmupToStableMs": {
+          "median": 1236.18
+        },
+        "idleRssMb": {
+          "median": 242.22,
+          "stddev": 0.0,
+          "runs": [
+            242.22
+          ]
+        },
+        "underLoadRssMb": {
+          "median": 576.0
+        },
+        "underLoadCpuPct": {
+          "median": 171.9
+        },
+        "imageSizeMb": {
+          "value": 188.8
+        },
+        "efficiency": {
+          "rpsPerMb": 21.74,
+          "rpsPerCpuPct": 72.83
+        }
+      }
+    },
+    {
+      "id": "spring-webflux-native",
+      "label": "Spring Boot 4 · WebFlux · Native",
+      "stack": "spring-boot-4",
+      "paradigm": "webflux",
+      "packaging": "native",
+      "ingestMode": "http",
+      "supported": false,
+      "notes": "Builds and starts (health 200). R2DBC INSERTs previously failed on the native image (~95% error; the passing reads bind no parameters). Root cause: a reflection/codec gap in the r2dbc-postgresql scalar bind/encode path. Fix applied: R2dbcNativeHints registers reflection for the bound JDK types and the driver codec classes. JVM-verified; this flag stays false until the native benchmark is re-run (no fabricated throughput). See docs/architecture/RISKS.md (R1).",
+      "metrics": null
+    },
+    {
+      "id": "spring-webflux-native",
+      "label": "Spring Boot 4 · WebFlux · Native",
+      "stack": "spring-boot-4",
+      "paradigm": "webflux",
+      "packaging": "native",
+      "ingestMode": "queue",
+      "supported": false,
+      "notes": "Builds and starts (health 200). R2DBC INSERTs previously failed on the native image (~95% error; the passing reads bind no parameters). Root cause: a reflection/codec gap in the r2dbc-postgresql scalar bind/encode path. Fix applied: R2dbcNativeHints registers reflection for the bound JDK types and the driver codec classes. JVM-verified; this flag stays false until the native benchmark is re-run (no fabricated throughput). See docs/architecture/RISKS.md (R1).",
+      "metrics": null
+    },
+    {
+      "id": "quarkus-reactive-jvm",
+      "label": "Quarkus · Reactive (Mutiny) · JVM",
+      "stack": "quarkus",
+      "paradigm": "reactive",
+      "packaging": "jvm",
+      "ingestMode": "http",
+      "supported": true,
+      "notes": "",
+      "metrics": {
+        "throughputRps": {
+          "median": 12668.7,
+          "stddev": 0.0,
+          "runs": [
+            12668.7
+          ]
+        },
+        "latencyMs": {
+          "p50": 10.64,
+          "p95": 19.03,
+          "p99": 26.95,
+          "p999": 118.34
+        },
+        "errorRatePct": {
+          "median": 0
+        },
+        "startupMs": {
+          "median": 989.5,
+          "stddev": 0.0,
+          "runs": [
+            989.5
+          ]
+        },
+        "timeToFirstReqMs": {
+          "median": 1183.41
+        },
+        "warmupToStableMs": {
+          "median": 1181.3
+        },
+        "idleRssMb": {
+          "median": 176.16,
+          "stddev": 0.0,
+          "runs": [
+            176.16
+          ]
+        },
+        "underLoadRssMb": {
+          "median": 210.3
+        },
+        "underLoadCpuPct": {
+          "median": 157.3
+        },
+        "imageSizeMb": {
+          "value": 150.8
+        },
+        "efficiency": {
+          "rpsPerMb": 60.24,
+          "rpsPerCpuPct": 80.54
+        }
+      }
+    },
+    {
+      "id": "quarkus-reactive-jvm",
+      "label": "Quarkus · Reactive (Mutiny) · JVM",
+      "stack": "quarkus",
+      "paradigm": "reactive",
+      "packaging": "jvm",
+      "ingestMode": "queue",
+      "supported": true,
+      "notes": "",
+      "metrics": {
+        "throughputRps": {
+          "median": 22670.2,
+          "stddev": 0.0,
+          "runs": [
+            22670.2
+          ]
+        },
+        "latencyMs": {
+          "p50": 3.34,
+          "p95": 11.99,
+          "p99": 201.15,
+          "p999": 210.17
+        },
+        "errorRatePct": {
+          "median": 0
+        },
+        "startupMs": {
+          "median": 1249.35,
+          "stddev": 0.0,
+          "runs": [
+            1249.35
+          ]
+        },
+        "timeToFirstReqMs": {
+          "median": 1385.5
+        },
+        "warmupToStableMs": {
+          "median": 1007.29
+        },
+        "idleRssMb": {
+          "median": 199.23,
+          "stddev": 0.0,
+          "runs": [
+            199.23
+          ]
+        },
+        "underLoadRssMb": {
+          "median": 255.3
+        },
+        "underLoadCpuPct": {
+          "median": 159.3
+        },
+        "imageSizeMb": {
+          "value": 150.8
+        },
+        "efficiency": {
+          "rpsPerMb": 88.8,
+          "rpsPerCpuPct": 142.31
+        }
+      }
+    },
+    {
+      "id": "quarkus-reactive-native",
+      "label": "Quarkus · Reactive (Mutiny) · Native",
+      "stack": "quarkus",
+      "paradigm": "reactive",
+      "packaging": "native",
+      "ingestMode": "http",
+      "supported": true,
+      "notes": "Re-measured at 2 CPU / 1 GB after the native response-serialization fix (@RegisterForReflection / @RegisterReflectionForBinding). Earlier native http/queue numbers were the HTTP-500 rate, masked by a 99% error threshold.",
+      "metrics": {
+        "throughputRps": {
+          "median": 8468.8,
+          "stddev": 0.0,
+          "runs": [
+            8468.8
+          ]
+        },
+        "latencyMs": {
+          "p50": 16.0,
+          "p95": 28.87,
+          "p99": 41.15,
+          "p999": 211.45
+        },
+        "errorRatePct": {
+          "median": 0
+        },
+        "startupMs": {
+          "median": 525.92,
+          "stddev": 0.0,
+          "runs": [
+            525.92
+          ]
+        },
+        "timeToFirstReqMs": {
+          "median": 611.47
+        },
+        "warmupToStableMs": {
+          "median": 663.39
+        },
+        "idleRssMb": {
+          "median": 140.82,
+          "stddev": 0.0,
+          "runs": [
+            140.82
+          ]
+        },
+        "underLoadRssMb": {
+          "median": 136.7
+        },
+        "underLoadCpuPct": {
+          "median": 162.4
+        },
+        "imageSizeMb": {
+          "value": 60.6
+        },
+        "efficiency": {
+          "rpsPerMb": 61.95,
+          "rpsPerCpuPct": 52.15
+        }
+      }
+    },
+    {
+      "id": "quarkus-reactive-native",
+      "label": "Quarkus · Reactive (Mutiny) · Native",
+      "stack": "quarkus",
+      "paradigm": "reactive",
+      "packaging": "native",
+      "ingestMode": "queue",
+      "supported": true,
+      "notes": "Re-measured at 2 CPU / 1 GB after the native response-serialization fix (@RegisterForReflection / @RegisterReflectionForBinding). Earlier native http/queue numbers were the HTTP-500 rate, masked by a 99% error threshold.",
+      "metrics": {
+        "throughputRps": {
+          "median": 15977.2,
+          "stddev": 0.0,
+          "runs": [
+            15977.2
+          ]
+        },
+        "latencyMs": {
+          "p50": 7.11,
+          "p95": 16.22,
+          "p99": 25.98,
+          "p999": 214.1
+        },
+        "errorRatePct": {
+          "median": 0
+        },
+        "startupMs": {
+          "median": 372.4,
+          "stddev": 0.0,
+          "runs": [
+            372.4
+          ]
+        },
+        "timeToFirstReqMs": {
+          "median": 456.21
+        },
+        "warmupToStableMs": {
+          "median": 669.45
+        },
+        "idleRssMb": {
+          "median": 62.52,
+          "stddev": 0.0,
+          "runs": [
+            62.52
+          ]
+        },
+        "underLoadRssMb": {
+          "median": 85.0
+        },
+        "underLoadCpuPct": {
+          "median": 171.9
+        },
+        "imageSizeMb": {
+          "value": 60.6
+        },
+        "efficiency": {
+          "rpsPerMb": 187.97,
+          "rpsPerCpuPct": 92.94
+        }
+      }
+    },
+    {
+      "id": "quarkus-imperative-jvm",
+      "label": "Quarkus · Imperative (blocking) · JVM",
+      "stack": "quarkus",
+      "paradigm": "imperative",
+      "packaging": "jvm",
+      "ingestMode": "http",
+      "supported": true,
+      "notes": "",
+      "metrics": {
+        "throughputRps": {
+          "median": 8166.1,
+          "stddev": 0.0,
+          "runs": [
+            8166.1
+          ]
+        },
+        "latencyMs": {
+          "p50": 15.53,
+          "p95": 38.57,
+          "p99": 61.68,
+          "p999": 214.61
+        },
+        "errorRatePct": {
+          "median": 0
+        },
+        "startupMs": {
+          "median": 1558.98,
+          "stddev": 0.0,
+          "runs": [
+            1558.98
+          ]
+        },
+        "timeToFirstReqMs": {
+          "median": 1718.17
+        },
+        "warmupToStableMs": {
+          "median": 1456.21
+        },
+        "idleRssMb": {
+          "median": 355.78,
+          "stddev": 0.0,
+          "runs": [
+            355.78
+          ]
+        },
+        "underLoadRssMb": {
+          "median": 491.3
+        },
+        "underLoadCpuPct": {
+          "median": 173.5
+        },
+        "imageSizeMb": {
+          "value": 170.1
+        },
+        "efficiency": {
+          "rpsPerMb": 16.62,
+          "rpsPerCpuPct": 47.07
+        }
+      }
+    },
+    {
+      "id": "quarkus-imperative-jvm",
+      "label": "Quarkus · Imperative (blocking) · JVM",
+      "stack": "quarkus",
+      "paradigm": "imperative",
+      "packaging": "jvm",
+      "ingestMode": "queue",
+      "supported": true,
+      "notes": "",
+      "metrics": {
+        "throughputRps": {
+          "median": 12464.9,
+          "stddev": 0.0,
+          "runs": [
+            12464.9
+          ]
+        },
+        "latencyMs": {
+          "p50": 9.14,
+          "p95": 23.54,
+          "p99": 44.32,
+          "p999": 218.94
+        },
+        "errorRatePct": {
+          "median": 0
+        },
+        "startupMs": {
+          "median": 1571.15,
+          "stddev": 0.0,
+          "runs": [
+            1571.15
+          ]
+        },
+        "timeToFirstReqMs": {
+          "median": 1693.27
+        },
+        "warmupToStableMs": {
+          "median": 1011.4
+        },
+        "idleRssMb": {
+          "median": 298.42,
+          "stddev": 0.0,
+          "runs": [
+            298.42
+          ]
+        },
+        "underLoadRssMb": {
+          "median": 433.1
+        },
+        "underLoadCpuPct": {
+          "median": 190.0
+        },
+        "imageSizeMb": {
+          "value": 170.1
+        },
+        "efficiency": {
+          "rpsPerMb": 28.78,
+          "rpsPerCpuPct": 65.6
+        }
+      }
+    },
+    {
+      "id": "quarkus-imperative-native",
+      "label": "Quarkus · Imperative (blocking) · Native",
+      "stack": "quarkus",
+      "paradigm": "imperative",
+      "packaging": "native",
+      "ingestMode": "http",
+      "supported": true,
+      "notes": "Re-measured at 2 CPU / 1 GB after the native response-serialization fix (@RegisterForReflection / @RegisterReflectionForBinding). Earlier native http/queue numbers were the HTTP-500 rate, masked by a 99% error threshold.",
+      "metrics": {
+        "throughputRps": {
+          "median": 8806.6,
+          "stddev": 0.0,
+          "runs": [
+            8806.6
+          ]
+        },
+        "latencyMs": {
+          "p50": 13.55,
+          "p95": 37.48,
+          "p99": 58.18,
+          "p999": 234.86
+        },
+        "errorRatePct": {
+          "median": 0
+        },
+        "startupMs": {
+          "median": 536.95,
+          "stddev": 0.0,
+          "runs": [
+            536.95
+          ]
+        },
+        "timeToFirstReqMs": {
+          "median": 607.14
+        },
+        "warmupToStableMs": {
+          "median": 616.95
+        },
+        "idleRssMb": {
+          "median": 178.89,
+          "stddev": 0.0,
+          "runs": [
+            178.89
+          ]
+        },
+        "underLoadRssMb": {
+          "median": 342.5
+        },
+        "underLoadCpuPct": {
+          "median": 179.4
+        },
+        "imageSizeMb": {
+          "value": 69.6
+        },
+        "efficiency": {
+          "rpsPerMb": 25.71,
+          "rpsPerCpuPct": 49.09
+        }
+      }
+    },
+    {
+      "id": "quarkus-imperative-native",
+      "label": "Quarkus · Imperative (blocking) · Native",
+      "stack": "quarkus",
+      "paradigm": "imperative",
+      "packaging": "native",
+      "ingestMode": "queue",
+      "supported": true,
+      "notes": "Re-measured at 2 CPU / 1 GB after the native response-serialization fix (@RegisterForReflection / @RegisterReflectionForBinding). Earlier native http/queue numbers were the HTTP-500 rate, masked by a 99% error threshold.",
+      "metrics": {
+        "throughputRps": {
+          "median": 10970.5,
+          "stddev": 0.0,
+          "runs": [
+            10970.5
+          ]
+        },
+        "latencyMs": {
+          "p50": 9.21,
+          "p95": 27.79,
+          "p99": 202.05,
+          "p999": 245.59
+        },
+        "errorRatePct": {
+          "median": 0
+        },
+        "startupMs": {
+          "median": 325.01,
+          "stddev": 0.0,
+          "runs": [
+            325.01
+          ]
+        },
+        "timeToFirstReqMs": {
+          "median": 394.67
+        },
+        "warmupToStableMs": {
+          "median": 445.26
+        },
+        "idleRssMb": {
+          "median": 74.11,
+          "stddev": 0.0,
+          "runs": [
+            74.11
+          ]
+        },
+        "underLoadRssMb": {
+          "median": 166.2
+        },
+        "underLoadCpuPct": {
+          "median": 182.0
+        },
+        "imageSizeMb": {
+          "value": 69.6
+        },
+        "efficiency": {
+          "rpsPerMb": 66.01,
+          "rpsPerCpuPct": 60.28
+        }
+      }
+    }
+  ]
+}

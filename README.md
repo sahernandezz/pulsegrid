@@ -174,14 +174,6 @@ for overload). Every number stays auditable against the code that produced it.
 **illustrative sample data** (`"sample": true`); the frontend renders it with a warning
 banner. It is replaced by real measurements when the runner is run.
 
-## Author
-
-**Sergio Alejandro Hernandez Zambrano** — *Sergio Hernandez* · Backend Software Engineer (Bogotá, Colombia).
-
-- 🌐 Portfolio — [sahernandezz.web.app](https://sahernandezz.web.app)
-- 💼 LinkedIn — [in/sergio-alejandro-hernandez-zambrano](https://www.linkedin.com/in/sergio-alejandro-hernandez-zambrano)
-- 🐙 GitHub — [@sahernandezz](https://github.com/sahernandezz)
-
 ## License
 
 MIT © Sergio Alejandro Hernandez Zambrano — see [LICENSE](LICENSE).

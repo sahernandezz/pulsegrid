@@ -1,0 +1,146 @@
+
+############################################################
+# ENVELOPE 1cpu-512m (queue)  ->  1 CPU / 512m / cpuset 0
+# 22:50:19
+############################################################
+PulseGrid runner · 6 variant(s) · cfg={'runs': 1, 'duration': 20, 'vus': 150, 'warmup_seconds': 12, 'idle_settle': 8, 'startup_timeout': 180, 'skip_build': True, 'keep_infra': False}
+
+=== spring-vt-jvm · mode queue ===
+  [run 1/1] spring-vt-jvm (queue)
+      cold start=5976ms  limits={'cpus': 1.0, 'memoryMb': 536.870912, 'cpuset': '0'}
+
+=== spring-webflux-jvm · mode queue ===
+  [run 1/1] spring-webflux-jvm (queue)
+      cold start=6841ms  limits={'cpus': 1.0, 'memoryMb': 536.870912, 'cpuset': '0'}
+
+=== quarkus-reactive-jvm · mode queue ===
+  [run 1/1] quarkus-reactive-jvm (queue)
+      cold start=2916ms  limits={'cpus': 1.0, 'memoryMb': 536.870912, 'cpuset': '0'}
+
+=== quarkus-reactive-native · mode queue ===
+  [run 1/1] quarkus-reactive-native (queue)
+      cold start=509ms  limits={'cpus': 1.0, 'memoryMb': 536.870912, 'cpuset': '0'}
+
+=== quarkus-imperative-jvm · mode queue ===
+  [run 1/1] quarkus-imperative-jvm (queue)
+      cold start=3803ms  limits={'cpus': 1.0, 'memoryMb': 536.870912, 'cpuset': '0'}
+
+=== quarkus-imperative-native · mode queue ===
+  [run 1/1] quarkus-imperative-native (queue)
+      cold start=592ms  limits={'cpus': 1.0, 'memoryMb': 536.870912, 'cpuset': '0'}
+
+✓ Consolidated written to benchmark/results/scaling/1cpu-512m-queue.json
+# ENVELOPE 1cpu-512m (queue) done -> benchmark/results/scaling/1cpu-512m-queue.json (22:54:42)
+
+############################################################
+# ENVELOPE 2cpu-1g (queue)  ->  2 CPU / 1g / cpuset 0,1
+# 22:54:42
+############################################################
+PulseGrid runner · 6 variant(s) · cfg={'runs': 1, 'duration': 20, 'vus': 150, 'warmup_seconds': 12, 'idle_settle': 8, 'startup_timeout': 180, 'skip_build': True, 'keep_infra': False}
+
+=== spring-vt-jvm · mode queue ===
+  [run 1/1] spring-vt-jvm (queue)
+      cold start=2825ms  limits={'cpus': 2.0, 'memoryMb': 1073.741824, 'cpuset': '0,1'}
+
+=== spring-webflux-jvm · mode queue ===
+  [run 1/1] spring-webflux-jvm (queue)
+      cold start=2791ms  limits={'cpus': 2.0, 'memoryMb': 1073.741824, 'cpuset': '0,1'}
+
+=== quarkus-reactive-jvm · mode queue ===
+  [run 1/1] quarkus-reactive-jvm (queue)
+      cold start=1274ms  limits={'cpus': 2.0, 'memoryMb': 1073.741824, 'cpuset': '0,1'}
+
+=== quarkus-reactive-native · mode queue ===
+  [run 1/1] quarkus-reactive-native (queue)
+      cold start=341ms  limits={'cpus': 2.0, 'memoryMb': 1073.741824, 'cpuset': '0,1'}
+
+=== quarkus-imperative-jvm · mode queue ===
+  [run 1/1] quarkus-imperative-jvm (queue)
+      cold start=1582ms  limits={'cpus': 2.0, 'memoryMb': 1073.741824, 'cpuset': '0,1'}
+
+=== quarkus-imperative-native · mode queue ===
+  [run 1/1] quarkus-imperative-native (queue)
+      cold start=332ms  limits={'cpus': 2.0, 'memoryMb': 1073.741824, 'cpuset': '0,1'}
+
+✓ Consolidated written to benchmark/results/scaling/2cpu-1g-queue.json
+# ENVELOPE 2cpu-1g (queue) done -> benchmark/results/scaling/2cpu-1g-queue.json (22:58:37)
+
+############################################################
+# ENVELOPE 4cpu-2g (queue)  ->  4 CPU / 2g / cpuset 0,1,2,3
+# 22:58:37
+############################################################
+PulseGrid runner · 6 variant(s) · cfg={'runs': 1, 'duration': 20, 'vus': 150, 'warmup_seconds': 12, 'idle_settle': 8, 'startup_timeout': 180, 'skip_build': True, 'keep_infra': False}
+
+=== spring-vt-jvm · mode queue ===
+  [run 1/1] spring-vt-jvm (queue)
+      cold start=1737ms  limits={'cpus': 4.0, 'memoryMb': 2147.483648, 'cpuset': '0,1,2,3'}
+
+=== spring-webflux-jvm · mode queue ===
+  [run 1/1] spring-webflux-jvm (queue)
+      cold start=2037ms  limits={'cpus': 4.0, 'memoryMb': 2147.483648, 'cpuset': '0,1,2,3'}
+
+=== quarkus-reactive-jvm · mode queue ===
+  [run 1/1] quarkus-reactive-jvm (queue)
+      cold start=1114ms  limits={'cpus': 4.0, 'memoryMb': 2147.483648, 'cpuset': '0,1,2,3'}
+
+=== quarkus-reactive-native · mode queue ===
+  [run 1/1] quarkus-reactive-native (queue)
+      cold start=333ms  limits={'cpus': 4.0, 'memoryMb': 2147.483648, 'cpuset': '0,1,2,3'}
+
+=== quarkus-imperative-jvm · mode queue ===
+  [run 1/1] quarkus-imperative-jvm (queue)
+      cold start=1444ms  limits={'cpus': 4.0, 'memoryMb': 2147.483648, 'cpuset': '0,1,2,3'}
+
+=== quarkus-imperative-native · mode queue ===
+  [run 1/1] quarkus-imperative-native (queue)
+      cold start=322ms  limits={'cpus': 4.0, 'memoryMb': 2147.483648, 'cpuset': '0,1,2,3'}
+
+✓ Consolidated written to benchmark/results/scaling/4cpu-2g-queue.json
+# ENVELOPE 4cpu-2g (queue) done -> benchmark/results/scaling/4cpu-2g-queue.json (23:02:28)
+
+=== SWEEP (queue) DONE in 12m 9s ===
+
+THROUGHPUT (req/s · higher = better)
+variant                       1cpu-512m      2cpu-1g      4cpu-2g
+-----------------------------------------------------------------
+quarkus-reactive-jvm              6,634       19,177       24,241
+quarkus-reactive-native           9,017       17,796       21,224
+quarkus-imperative-native         5,112       14,334       20,404
+quarkus-imperative-jvm            2,673       12,033       19,529
+spring-vt-jvm                     1,940        5,161       16,101
+spring-webflux-jvm                2,178        9,455       15,664
+
+p99 LATENCY (ms · lower = better)
+variant                       1cpu-512m      2cpu-1g      4cpu-2g
+-----------------------------------------------------------------
+quarkus-reactive-jvm               85.0        200.9        202.6
+quarkus-reactive-native            37.5         24.9        203.1
+quarkus-imperative-native          72.3         32.1        201.6
+quarkus-imperative-jvm            135.9         61.1        202.9
+spring-vt-jvm                   1,151.1        362.4        202.5
+spring-webflux-jvm                212.3        204.7        205.5
+
+IDLE RSS (MB · lower = better)
+variant                       1cpu-512m      2cpu-1g      4cpu-2g
+-----------------------------------------------------------------
+quarkus-reactive-jvm                269          279          336
+quarkus-reactive-native             155           76          157
+quarkus-imperative-native           187          185          184
+quarkus-imperative-jvm              370          308          399
+spring-vt-jvm                       346          357          456
+spring-webflux-jvm                  256          248          355
+
+CPU SCALING  1cpu-512m -> 4cpu-2g  (throughput ×)
+  quarkus-reactive-jvm          6,634  ->    24,241     3.65×
+  quarkus-reactive-native       9,017  ->    21,224     2.35×
+  quarkus-imperative-native     5,112  ->    20,404     3.99×
+  quarkus-imperative-jvm        2,673  ->    19,529     7.31×
+  spring-vt-jvm                 1,940  ->    16,101     8.30×
+  spring-webflux-jvm            2,178  ->    15,664     7.19×
+
+MEMORY FLOOR @ 1cpu-512m (512m):
+  survived: ['quarkus-reactive-jvm', 'quarkus-reactive-native', 'quarkus-imperative-native', 'quarkus-imperative-jvm', 'spring-vt-jvm', 'spring-webflux-jvm']
+  failed  : (none)
+
+✓ scaling-results.json written (6 variants × 3 envelopes)
+=== REPORT WRITTEN ===

@@ -1,0 +1,310 @@
+# =============================================================================
+# PulseGrid — docker-compose for comparative benchmarking
+# =============================================================================
+#
+# DESIGN PRINCIPLE: stack-agnostic.
+#   - Every backend is a service with IDENTICAL CPU/MEMORY LIMITS.
+#   - The limits are defined ONCE via a YAML anchor (&res_limits) and reused, so
+#     it is impossible for one variant to run with different resources.
+#   - Every backend is enabled by a docker-compose PROFILE, so the runner brings
+#     up ONE variant at a time (isolated, fair measurement).
+#   - Adding a new backend (even in another language: Go, Rust, Node...) is just
+#     adding a service that honors the same contract: same API, same internal
+#     port, same env vars, same &res_limits, its own profile.
+#
+# CONTRACT EVERY BACKEND MUST HONOR (Java, Go, Rust, whatever):
+#   - Exposes the PulseGrid API on internal port 8080.
+#   - Reads INGEST_MODE (http|queue), DB_* and KAFKA_* from the environment.
+#   - Exposes a health check and a Prometheus metrics endpoint.
+#
+# USAGE (the runner does this per variant, one at a time):
+#   Bring up base infra + one variant:
+#     docker compose --profile infra --profile spring-vt-jvm up -d
+#   After measuring, tear the variant down (infra may stay or restart clean):
+#     docker compose --profile spring-vt-jvm down
+#
+# DUAL INGESTION:
+#   INGEST_MODE=http  -> backend receives events over HTTP (synchronous).
+#   INGEST_MODE=queue -> backend consumes from Kafka (asynchronous). Requires the
+#                        'queue' profile (brings up kafka).
+# =============================================================================
+
+# --- Reusable anchors --------------------------------------------------------
+x-res-limits: &res_limits
+  # IDENTICAL LIMITS FOR ALL VARIANTS — do not change per variant.
+  deploy:
+    resources:
+      limits:
+        cpus: "${PG_CPUS:-2.0}"
+        memory: ${PG_MEM:-1g}
+      reservations:
+        cpus: "${PG_CPUS:-2.0}"
+        memory: ${PG_MEM:-1g}
+  # For standalone compose (no swarm) these are the effective limits.
+  # Overridable for the resource-scaling sweep (PG_CPUS / PG_MEM / PG_CPUSET);
+  # still IDENTICAL across all variants within a given envelope.
+  mem_limit: ${PG_MEM:-1g}
+  memswap_limit: ${PG_MEM:-1g}    # prevents swap use that would pollute RAM measurement
+  cpus: ${PG_CPUS:-2.0}
+  cpuset: "${PG_CPUSET:-0,1}"     # pins the same physical cores on every run
+
+x-backend-env: &backend_env
+  INGEST_MODE: ${INGEST_MODE:-http}     # http | queue
+  DB_HOST: postgres
+  DB_PORT: "5432"
+  DB_NAME: pulsegrid
+  DB_USER: pulse
+  DB_PASSWORD: pulse
+  KAFKA_BOOTSTRAP: kafka:9092
+  KAFKA_TOPIC: metric-events
+  SERVER_PORT: "8080"
+  # Connection-pool size. Default 64 (matches the application configs); overridable
+  # via PG_POOL for the DB-tuning experiment. Each app reads only its own key.
+  SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE: ${PG_POOL:-64}
+  SPRING_R2DBC_POOL_MAX_SIZE: ${PG_POOL:-64}
+  QUARKUS_DATASOURCE_JDBC_MAX_SIZE: ${PG_POOL:-64}
+  QUARKUS_DATASOURCE_REACTIVE_MAX_SIZE: ${PG_POOL:-64}
+
+x-healthcheck: &backend_healthcheck
+  # Each backend exposes the real health; the runner also measures startup itself.
+  test: ["CMD", "sh", "-c", "wget -qO- http://localhost:8080/health || curl -fsS http://localhost:8080/health || exit 1"]
+  interval: 2s
+  timeout: 2s
+  retries: 60
+  start_period: 1s
+
+# =============================================================================
+services:
+
+  # --- Base infrastructure ---------------------------------------------------
+  postgres:
+    image: postgres:16-alpine
+    profiles: ["infra"]
+    # Defaults match stock Postgres 16 → baseline unchanged. The DB-tuning
+    # experiment overrides these (PG_SYNC=off, bigger pool, WAL) to lift the
+    # DB-bound ceiling and show whether http then scales with CPU.
+    command:
+      - "postgres"
+      - "-c"
+      - "synchronous_commit=${PG_SYNC:-on}"
+      - "-c"
+      - "max_connections=${PG_MAXCONN:-100}"
+      - "-c"
+      - "shared_buffers=${PG_SHARED:-128MB}"
+      - "-c"
+      - "max_wal_size=${PG_MAXWAL:-1GB}"
+    environment:
+      POSTGRES_DB: pulsegrid
+      POSTGRES_USER: pulse
+      POSTGRES_PASSWORD: pulse
+    ports: ["5432:5432"]
+    volumes:
+      - ./db/migrations:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pulse -d pulsegrid"]
+      interval: 2s
+      timeout: 2s
+      retries: 30
+    # The DB does NOT carry the backend limits: it is not the subject of measurement.
+    # But it must be identical and stable across all runs.
+
+  kafka:
+    image: apache/kafka:3.7.0      # KRaft mode, no zookeeper
+    profiles: ["queue"]            # only started when measuring queue ingestion
+    environment:
+      KAFKA_NODE_ID: "1"
+      KAFKA_PROCESS_ROLES: "broker,controller"
+      KAFKA_LISTENERS: "PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093"
+      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka:9092"
+      KAFKA_CONTROLLER_LISTENER_NAMES: "CONTROLLER"
+      KAFKA_CONTROLLER_QUORUM_VOTERS: "1@kafka:9093"
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "1"
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+    ports: ["9092:9092"]
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --list || exit 1"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+
+  prometheus:
+    image: prom/prometheus:latest
+    profiles: ["infra"]
+    ports: ["9090:9090"]
+    volumes:
+      - ./runner/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    # Scrapes the active backend's metrics endpoint (always the same port).
+
+  # ===========================================================================
+  # BACKENDS — one per variant. Same contract, same &res_limits, same host port
+  # 8080 (only one active at a time), distinct profile.
+  # ===========================================================================
+
+  # --- Spring Boot 4 · Virtual Threads · JVM ---------------------------------
+  spring-vt-jvm:
+    build:
+      context: ./backends/spring
+      dockerfile: Dockerfile
+      args:
+        PARADIGM: virtual-threads
+        PACKAGING: jvm
+    image: pulsegrid/spring-vt-jvm
+    profiles: ["spring-vt-jvm"]
+    environment:
+      <<: *backend_env
+      JAVA_OPTS: "${JAVA_OPTS:--XX:MaxRAMPercentage=75.0 -XX:+UseZGC}"   # container-aware: heap scales with the limit
+    ports: ["8080:8080"]
+    <<: *res_limits
+    healthcheck: *backend_healthcheck
+    depends_on:
+      postgres: { condition: service_healthy }
+
+  # --- Spring Boot 4 · Virtual Threads · Native ------------------------------
+  spring-vt-native:
+    build:
+      context: ./backends/spring
+      dockerfile: Dockerfile.native
+      args:
+        PARADIGM: virtual-threads
+    image: pulsegrid/spring-vt-native
+    profiles: ["spring-vt-native"]
+    environment: *backend_env
+    ports: ["8080:8080"]
+    <<: *res_limits
+    healthcheck: *backend_healthcheck
+    depends_on:
+      postgres: { condition: service_healthy }
+
+  # --- Spring Boot 4 · WebFlux · JVM -----------------------------------------
+  spring-webflux-jvm:
+    build:
+      context: ./backends/spring
+      dockerfile: Dockerfile
+      args:
+        PARADIGM: webflux
+        PACKAGING: jvm
+    image: pulsegrid/spring-webflux-jvm
+    profiles: ["spring-webflux-jvm"]
+    environment:
+      <<: *backend_env
+      JAVA_OPTS: "${JAVA_OPTS:--XX:MaxRAMPercentage=75.0 -XX:+UseZGC}"
+    ports: ["8080:8080"]
+    <<: *res_limits
+    healthcheck: *backend_healthcheck
+    depends_on:
+      postgres: { condition: service_healthy }
+
+  # --- Spring Boot 4 · WebFlux · Native (highest build risk) -----------------
+  spring-webflux-native:
+    build:
+      context: ./backends/spring
+      dockerfile: Dockerfile.native
+      args:
+        PARADIGM: webflux
+    image: pulsegrid/spring-webflux-native
+    profiles: ["spring-webflux-native"]
+    environment: *backend_env
+    ports: ["8080:8080"]
+    <<: *res_limits
+    healthcheck: *backend_healthcheck
+    depends_on:
+      postgres: { condition: service_healthy }
+
+  # --- Quarkus · Reactive (Mutiny) · JVM -------------------------------------
+  quarkus-reactive-jvm:
+    build:
+      context: ./backends/quarkus
+      dockerfile: src/main/docker/Dockerfile.jvm
+      args:
+        PARADIGM: reactive
+    image: pulsegrid/quarkus-reactive-jvm
+    profiles: ["quarkus-reactive-jvm"]
+    environment:
+      <<: *backend_env
+      JAVA_OPTS: "${JAVA_OPTS:--XX:MaxRAMPercentage=75.0 -XX:+UseZGC}"
+    ports: ["8080:8080"]
+    <<: *res_limits
+    healthcheck: *backend_healthcheck
+    depends_on:
+      postgres: { condition: service_healthy }
+
+  # --- Quarkus · Imperative (blocking) · JVM ---------------------------------
+  quarkus-imperative-jvm:
+    build:
+      context: ./backends/quarkus
+      dockerfile: src/main/docker/Dockerfile.jvm
+      args:
+        PARADIGM: imperative
+    image: pulsegrid/quarkus-imperative-jvm
+    profiles: ["quarkus-imperative-jvm"]
+    environment:
+      <<: *backend_env
+      JAVA_OPTS: "${JAVA_OPTS:--XX:MaxRAMPercentage=75.0 -XX:+UseZGC}"
+    ports: ["8080:8080"]
+    <<: *res_limits
+    healthcheck: *backend_healthcheck
+    depends_on:
+      postgres: { condition: service_healthy }
+
+  # --- Quarkus · Reactive (Mutiny) · Native ----------------------------------
+  quarkus-reactive-native:
+    build:
+      context: ./backends/quarkus
+      dockerfile: src/main/docker/Dockerfile.native
+      args:
+        PARADIGM: reactive
+    image: pulsegrid/quarkus-reactive-native
+    profiles: ["quarkus-reactive-native"]
+    environment: *backend_env
+    ports: ["8080:8080"]
+    <<: *res_limits
+    healthcheck: *backend_healthcheck
+    depends_on:
+      postgres: { condition: service_healthy }
+
+  # --- Quarkus · Imperative (blocking) · Native ------------------------------
+  quarkus-imperative-native:
+    build:
+      context: ./backends/quarkus
+      dockerfile: src/main/docker/Dockerfile.native
+      args:
+        PARADIGM: imperative
+    image: pulsegrid/quarkus-imperative-native
+    profiles: ["quarkus-imperative-native"]
+    environment: *backend_env
+    ports: ["8080:8080"]
+    <<: *res_limits
+    healthcheck: *backend_healthcheck
+    depends_on:
+      postgres: { condition: service_healthy }
+
+  # ===========================================================================
+  # FUTURE VARIANTS (other languages) — template to copy.
+  # The runner picks them up like the rest if they honor the contract.
+  # ---------------------------------------------------------------------------
+  # go-fiber:
+  #   build: { context: ./backends/go }
+  #   image: pulsegrid/go-fiber
+  #   profiles: ["go-fiber"]
+  #   environment: *backend_env
+  #   ports: ["8080:8080"]
+  #   <<: *res_limits
+  #   healthcheck: *backend_healthcheck
+  #   depends_on:
+  #     postgres: { condition: service_healthy }
+  #
+  # rust-axum:
+  #   build: { context: ./backends/rust }
+  #   image: pulsegrid/rust-axum
+  #   profiles: ["rust-axum"]
+  #   environment: *backend_env
+  #   ports: ["8080:8080"]
+  #   <<: *res_limits
+  #   healthcheck: *backend_healthcheck
+  #   depends_on:
+  #     postgres: { condition: service_healthy }
+  # ===========================================================================
+
+# Note: the React frontend does NOT live here — it is a static site that consumes
+# the consolidated file produced by the runner; it is deployed separately.

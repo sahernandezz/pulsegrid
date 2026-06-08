@@ -1,0 +1,90 @@
+# =============================================================================
+# PulseGrid · registry of variants to measure.
+# Adding a variant (even in another language) = add an entry here + its service
+# in docker-compose.yml honoring the same contract. The runner does not change.
+# =============================================================================
+
+defaults:
+  ingestModes: [http, queue]      # every variant is measured in both modes
+  runs: 3                          # >=3 runs per scenario (median + stddev)
+  warmupSeconds: 30                # discarded warm-up (critical for JVM due to JIT)
+  idleSettleSeconds: 30            # settle before measuring idle RSS
+  loadDurationSeconds: 60          # measured load phase duration per run
+  vus: 50                          # concurrent virtual users in k6
+  healthPath: /health              # simple liveness (same on every variant)
+  latencyThresholdMs: 100          # target p99 used to define "saturation"
+
+variants:
+  - id: spring-vt-jvm
+    label: "Spring Boot 4 · Virtual Threads · JVM"
+    stack: spring-boot-4
+    paradigm: virtual-threads
+    packaging: jvm
+    composeProfile: spring-vt-jvm
+    image: pulsegrid/spring-vt-jvm
+    metricsPath: /actuator/prometheus
+
+  - id: spring-vt-native
+    label: "Spring Boot 4 · Virtual Threads · Native"
+    stack: spring-boot-4
+    paradigm: virtual-threads
+    packaging: native
+    composeProfile: spring-vt-native
+    image: pulsegrid/spring-vt-native
+    metricsPath: /actuator/prometheus
+
+  - id: spring-webflux-jvm
+    label: "Spring Boot 4 · WebFlux · JVM"
+    stack: spring-boot-4
+    paradigm: webflux
+    packaging: jvm
+    composeProfile: spring-webflux-jvm
+    image: pulsegrid/spring-webflux-jvm
+    metricsPath: /actuator/prometheus
+
+  - id: spring-webflux-native
+    label: "Spring Boot 4 · WebFlux · Native"
+    stack: spring-boot-4
+    paradigm: webflux
+    packaging: native
+    composeProfile: spring-webflux-native
+    image: pulsegrid/spring-webflux-native
+    metricsPath: /actuator/prometheus
+    # Highest build risk (Reactor AOT). If the image fails to build, the runner
+    # marks it supported:false with the error as a note (it does not fabricate data).
+
+  - id: quarkus-reactive-jvm
+    label: "Quarkus · Reactive (Mutiny) · JVM"
+    stack: quarkus
+    paradigm: reactive
+    packaging: jvm
+    composeProfile: quarkus-reactive-jvm
+    image: pulsegrid/quarkus-reactive-jvm
+    metricsPath: /q/metrics
+
+  - id: quarkus-imperative-jvm
+    label: "Quarkus · Imperative (blocking) · JVM"
+    stack: quarkus
+    paradigm: imperative
+    packaging: jvm
+    composeProfile: quarkus-imperative-jvm
+    image: pulsegrid/quarkus-imperative-jvm
+    metricsPath: /q/metrics
+
+  - id: quarkus-reactive-native
+    label: "Quarkus · Reactive (Mutiny) · Native"
+    stack: quarkus
+    paradigm: reactive
+    packaging: native
+    composeProfile: quarkus-reactive-native
+    image: pulsegrid/quarkus-reactive-native
+    metricsPath: /q/metrics
+
+  - id: quarkus-imperative-native
+    label: "Quarkus · Imperative (blocking) · Native"
+    stack: quarkus
+    paradigm: imperative
+    packaging: native
+    composeProfile: quarkus-imperative-native
+    image: pulsegrid/quarkus-imperative-native
+    metricsPath: /q/metrics

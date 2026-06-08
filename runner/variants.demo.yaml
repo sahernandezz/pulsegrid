@@ -1,0 +1,52 @@
+# =============================================================================
+# PulseGrid · DEMO variant set — for a fast live run on a single machine.
+# Reduced timings + JVM/http only so the run completes quickly. The canonical
+# methodology (≥3 runs, 30s warm-up/settle, both ingest modes, native variants)
+# lives in variants.yaml. This file is NOT the real benchmark.
+# =============================================================================
+defaults:
+  ingestModes: [http]
+  runs: 1
+  warmupSeconds: 6
+  idleSettleSeconds: 6
+  loadDurationSeconds: 18
+  vus: 40
+  healthPath: /health
+  latencyThresholdMs: 100
+
+variants:
+  - id: spring-vt-jvm
+    label: "Spring Boot 4 · Virtual Threads · JVM"
+    stack: spring-boot-4
+    paradigm: virtual-threads
+    packaging: jvm
+    composeProfile: spring-vt-jvm
+    image: pulsegrid/spring-vt-jvm
+    metricsPath: /actuator/prometheus
+
+  - id: spring-webflux-jvm
+    label: "Spring Boot 4 · WebFlux · JVM"
+    stack: spring-boot-4
+    paradigm: webflux
+    packaging: jvm
+    composeProfile: spring-webflux-jvm
+    image: pulsegrid/spring-webflux-jvm
+    metricsPath: /actuator/prometheus
+
+  - id: quarkus-reactive-jvm
+    label: "Quarkus · Reactive (Mutiny) · JVM"
+    stack: quarkus
+    paradigm: reactive
+    packaging: jvm
+    composeProfile: quarkus-reactive-jvm
+    image: pulsegrid/quarkus-reactive-jvm
+    metricsPath: /q/metrics
+
+  - id: quarkus-imperative-jvm
+    label: "Quarkus · Imperative (blocking) · JVM"
+    stack: quarkus
+    paradigm: imperative
+    packaging: jvm
+    composeProfile: quarkus-imperative-jvm
+    image: pulsegrid/quarkus-imperative-jvm
+    metricsPath: /q/metrics

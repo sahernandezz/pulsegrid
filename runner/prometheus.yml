@@ -1,0 +1,25 @@
+# =============================================================================
+# Prometheus — scrapes the active backend (always the same port 8080).
+# The runner brings up ONE variant at a time; Prometheus targets
+# host.docker.internal to reach the port the variant publishes on the host.
+# =============================================================================
+global:
+  scrape_interval: 2s
+  evaluation_interval: 5s
+
+scrape_configs:
+  # Spring exposes /actuator/prometheus ; Quarkus exposes /q/metrics.
+  # Both targets are defined with their path; only one responds depending on the
+  # active variant (the other returns 404 and Prometheus marks it 'down', without
+  # affecting the measurement).
+  - job_name: "pulsegrid-spring"
+    metrics_path: /actuator/prometheus
+    static_configs:
+      - targets: ["host.docker.internal:8080"]
+        labels: { stack: "spring" }
+
+  - job_name: "pulsegrid-quarkus"
+    metrics_path: /q/metrics
+    static_configs:
+      - targets: ["host.docker.internal:8080"]
+        labels: { stack: "quarkus" }

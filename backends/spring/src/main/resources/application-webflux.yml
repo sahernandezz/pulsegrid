@@ -1,0 +1,14 @@
+# =============================================================================
+# WEBFLUX profile: Netty + R2DBC, non-blocking (Reactor). FORBIDDEN: .block() and
+# synchronous JDBC on the reactive path. Kafka (when queue) via reactor-kafka, in code.
+# =============================================================================
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:pulsegrid}
+    username: ${DB_USER:pulse}
+    password: ${DB_PASSWORD:pulse}
+    pool:
+      enabled: true
+      initial-size: 8
+      max-size: 64
+      max-idle-time: 30s

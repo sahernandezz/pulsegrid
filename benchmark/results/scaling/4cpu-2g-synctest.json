@@ -1,0 +1,143 @@
+{
+  "generatedAt": "2026-06-04T07:02:44.286055Z",
+  "sample": false,
+  "environment": {
+    "cpu": "Apple M3",
+    "cores": 8,
+    "ramGb": 17.2,
+    "os": "macOS 26.5",
+    "java": "openjdk version 25.0.3 2026-04-21 LTS",
+    "graalvm": "",
+    "springBoot": "4.0.0",
+    "quarkus": "3.17.5",
+    "containerLimits": {
+      "cpus": 4,
+      "memory": "2g",
+      "cpuset": "0,1,2,3"
+    }
+  },
+  "variants": [
+    {
+      "id": "quarkus-reactive-jvm",
+      "label": "Quarkus · Reactive (Mutiny) · JVM",
+      "stack": "quarkus",
+      "paradigm": "reactive",
+      "packaging": "jvm",
+      "ingestMode": "http",
+      "supported": true,
+      "notes": "",
+      "metrics": {
+        "throughputRps": {
+          "median": 11817.0,
+          "stddev": 0.0,
+          "runs": [
+            11817.0
+          ]
+        },
+        "latencyMs": {
+          "p50": 4.39,
+          "p95": 25.3,
+          "p99": 208.91,
+          "p999": 602.81
+        },
+        "errorRatePct": {
+          "median": 0
+        },
+        "startupMs": {
+          "median": 995.8,
+          "stddev": 0.0,
+          "runs": [
+            995.8
+          ]
+        },
+        "timeToFirstReqMs": {
+          "median": 1175.42
+        },
+        "warmupToStableMs": {
+          "median": 878.65
+        },
+        "idleRssMb": {
+          "median": 247.78,
+          "stddev": 0.0,
+          "runs": [
+            247.78
+          ]
+        },
+        "underLoadRssMb": {
+          "median": 305.9
+        },
+        "underLoadCpuPct": {
+          "median": 266.3
+        },
+        "imageSizeMb": {
+          "value": 150.8
+        },
+        "efficiency": {
+          "rpsPerMb": 38.63,
+          "rpsPerCpuPct": 44.37
+        }
+      }
+    },
+    {
+      "id": "quarkus-imperative-jvm",
+      "label": "Quarkus · Imperative (blocking) · JVM",
+      "stack": "quarkus",
+      "paradigm": "imperative",
+      "packaging": "jvm",
+      "ingestMode": "http",
+      "supported": true,
+      "notes": "",
+      "metrics": {
+        "throughputRps": {
+          "median": 8569.6,
+          "stddev": 0.0,
+          "runs": [
+            8569.6
+          ]
+        },
+        "latencyMs": {
+          "p50": 7.88,
+          "p95": 43.74,
+          "p99": 217.49,
+          "p999": 317.22
+        },
+        "errorRatePct": {
+          "median": 0
+        },
+        "startupMs": {
+          "median": 1396.96,
+          "stddev": 0.0,
+          "runs": [
+            1396.96
+          ]
+        },
+        "timeToFirstReqMs": {
+          "median": 1565.86
+        },
+        "warmupToStableMs": {
+          "median": 989.73
+        },
+        "idleRssMb": {
+          "median": 353.27,
+          "stddev": 0.0,
+          "runs": [
+            353.27
+          ]
+        },
+        "underLoadRssMb": {
+          "median": 608.3
+        },
+        "underLoadCpuPct": {
+          "median": 329.9
+        },
+        "imageSizeMb": {
+          "value": 170.1
+        },
+        "efficiency": {
+          "rpsPerMb": 14.09,
+          "rpsPerCpuPct": 25.98
+        }
+      }
+    }
+  ]
+}

@@ -17,6 +17,9 @@ frontend/dist/
 frontend/.vite/
 *.local
 
+# --- Firebase (hosting deploy cache) ---
+.firebase/
+
 # --- Python (runner / benchmark) ---
 __pycache__/
 *.py[cod]

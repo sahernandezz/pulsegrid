@@ -1,5 +1,8 @@
 # PulseGrid
 
+> ### 🔗 Live showcase → **[pulsegrid.web.app](https://pulsegrid.web.app)**
+> Interactive consolidated results — the refined dark dashboard that reads `consolidated-results.json` (filterable matrix, scaling curves, per-variant detail · EN/ES).
+
 **Today, with Spring Boot 4 / Java 25, Virtual Threads and GraalVM native compilation
 all available — which concurrency paradigm is the right choice for a high-concurrency
 ingestion service, and why?** PulseGrid answers that with **real, reproducible
@@ -104,6 +107,9 @@ python analyze.py            # -> plots/output/*.png + article-kit/*
 ```
 
 ### Frontend (showcase)
+
+Deployed live at **https://pulsegrid.web.app** (Firebase Hosting). To run it locally:
+
 ```bash
 cd frontend && npm install && npm run dev      # reads ../consolidated-results.json
 npm run build                                  # static site in dist/

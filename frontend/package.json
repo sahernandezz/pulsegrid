@@ -10,7 +10,8 @@
     "dev": "vite",
     "prebuild": "npm run sync-data",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "gen-og": "node scripts/gen-og.mjs"
   },
   "dependencies": {
     "firebase": "^12.14.0",
@@ -20,6 +21,7 @@
     "recharts": "^2.12.7"
   },
   "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.41",

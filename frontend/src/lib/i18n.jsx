@@ -180,6 +180,8 @@ const DICT = {
     'footer.text1': 'PulseGrid — every number auditable against the code. Charts and findings regenerate from ',
     'footer.text2': '.',
     'footer.source': 'Source on GitHub',
+    'footer.builtBy': 'Built by',
+    'footer.portfolio': 'Portfolio',
   },
 
   es: {
@@ -345,6 +347,8 @@ const DICT = {
       'PulseGrid — cada número auditable contra el código. Las gráficas y los hallazgos se regeneran desde ',
     'footer.text2': '.',
     'footer.source': 'Código en GitHub',
+    'footer.builtBy': 'Hecho por',
+    'footer.portfolio': 'Portafolio',
 
     // metadata labels — only descriptive English terms are translated; product /
     // feature names (Spring Boot 4, Virtual Threads, WebFlux, Mutiny, Quarkus, JVM)

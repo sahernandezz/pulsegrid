@@ -176,4 +176,4 @@ banner. It is replaced by real measurements when the runner is run.
 
 ## License
 
-MIT © Sergio Alejandro Hernandez Zambrano — see [LICENSE](LICENSE).
+MIT [LICENSE](LICENSE).

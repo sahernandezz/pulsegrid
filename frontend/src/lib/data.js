@@ -4,6 +4,16 @@ import { useEffect, useState } from 'react';
 // Change this to the published repo URL.
 export const REPO_URL = 'https://github.com/sahernandezz/pulsegrid';
 
+// Project author / creator — links the showcase back to its author.
+export const AUTHOR = {
+  name: 'Sergio Hernandez',
+  fullName: 'Sergio Alejandro Hernandez Zambrano',
+  role: 'Backend Software Engineer',
+  portfolio: 'https://sahernandezz.web.app',
+  linkedin: 'https://www.linkedin.com/in/sergio-alejandro-hernandez-zambrano',
+  github: 'https://github.com/sahernandezz',
+};
+
 // --- Metadata for badges / colors -------------------------------------------
 export const PARADIGM_META = {
   'virtual-threads': { short: 'VT', label: 'Virtual Threads', tone: 'pulse' },

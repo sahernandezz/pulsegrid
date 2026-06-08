@@ -8,10 +8,16 @@
     <title>PulseGrid — concurrency paradigms, measured</title>
     <meta name="description" content="Real, reproducible benchmarks of Spring Boot 4 and Quarkus concurrency paradigms (Virtual Threads, WebFlux, Mutiny, imperative) across JVM and GraalVM native — identical resource limits, median of multiple runs." />
     <meta name="keywords" content="Spring Boot 4, Quarkus, Virtual Threads, WebFlux, Mutiny, GraalVM native, JVM, benchmark, concurrency, throughput, latency, R2DBC" />
-    <meta name="author" content="Sergio Alejandro Hz" />
+    <meta name="author" content="Sergio Alejandro Hernandez Zambrano" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta name="theme-color" content="#0a0c10" />
     <link rel="canonical" href="https://pulsegrid.web.app/" />
+
+    <!-- Author identity (rel=me / rel=author) -->
+    <link rel="author" href="https://sahernandezz.web.app" />
+    <link rel="me" href="https://sahernandezz.web.app" />
+    <link rel="me" href="https://github.com/sahernandezz" />
+    <link rel="me" href="https://www.linkedin.com/in/sergio-alejandro-hernandez-zambrano" />
 
     <!-- Icons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -23,7 +29,8 @@
     <meta property="og:title" content="PulseGrid — concurrency paradigms, measured" />
     <meta property="og:description" content="Spring Boot 4 vs Quarkus · Virtual Threads, WebFlux, Mutiny, imperative · JVM vs GraalVM native. Real, reproducible high-concurrency ingestion benchmarks." />
     <meta property="og:url" content="https://pulsegrid.web.app/" />
-    <meta property="og:image" content="https://pulsegrid.web.app/og.svg" />
+    <meta property="og:image" content="https://pulsegrid.web.app/og.png" />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="en_US" />
@@ -33,7 +40,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="PulseGrid — concurrency paradigms, measured" />
     <meta name="twitter:description" content="Spring Boot 4 vs Quarkus · Virtual Threads, WebFlux, Mutiny, imperative · JVM vs GraalVM native. Real, reproducible benchmarks." />
-    <meta name="twitter:image" content="https://pulsegrid.web.app/og.svg" />
+    <meta name="twitter:image" content="https://pulsegrid.web.app/og.png" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -47,13 +54,46 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "PulseGrid",
-        "url": "https://pulsegrid.web.app/",
-        "description": "Real, reproducible benchmarks of Spring Boot 4 and Quarkus concurrency paradigms across JVM and GraalVM native.",
-        "inLanguage": ["en", "es"],
-        "author": { "@type": "Person", "name": "Sergio Alejandro Hz" },
-        "keywords": "Spring Boot 4, Quarkus, Virtual Threads, WebFlux, Mutiny, GraalVM native, JVM, benchmark, concurrency"
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://sahernandezz.web.app/#person",
+            "name": "Sergio Alejandro Hernandez Zambrano",
+            "alternateName": ["Sergio Hernandez", "sahernandezz"],
+            "givenName": "Sergio Alejandro",
+            "familyName": "Hernandez Zambrano",
+            "jobTitle": "Backend Software Engineer",
+            "url": "https://sahernandezz.web.app",
+            "image": "https://pulsegrid.web.app/og.png",
+            "knowsAbout": ["Java", "Spring Boot", "Quarkus", "Virtual Threads", "Spring WebFlux", "GraalVM native", "Apache Kafka", "PostgreSQL", "Microservices"],
+            "sameAs": [
+              "https://github.com/sahernandezz",
+              "https://www.linkedin.com/in/sergio-alejandro-hernandez-zambrano",
+              "https://sahernandezz.web.app"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://pulsegrid.web.app/#website",
+            "name": "PulseGrid",
+            "url": "https://pulsegrid.web.app/",
+            "description": "Real, reproducible benchmarks of Spring Boot 4 and Quarkus concurrency paradigms across JVM and GraalVM native.",
+            "inLanguage": ["en", "es"],
+            "keywords": "Spring Boot 4, Quarkus, Virtual Threads, WebFlux, Mutiny, GraalVM native, JVM, benchmark, concurrency",
+            "author": { "@id": "https://sahernandezz.web.app/#person" },
+            "creator": { "@id": "https://sahernandezz.web.app/#person" }
+          },
+          {
+            "@type": "SoftwareSourceCode",
+            "name": "PulseGrid",
+            "description": "Comparative concurrency benchmarking framework — Spring Boot 4 and Quarkus across JVM and GraalVM native.",
+            "url": "https://pulsegrid.web.app/",
+            "codeRepository": "https://github.com/sahernandezz/pulsegrid",
+            "programmingLanguage": ["Java", "JavaScript", "Python"],
+            "runtimePlatform": ["JVM", "GraalVM native"],
+            "author": { "@id": "https://sahernandezz.web.app/#person" }
+          }
+        ]
       }
     </script>
   </head>

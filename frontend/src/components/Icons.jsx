@@ -19,6 +19,15 @@ export function GitHub(props) {
   );
 }
 
+export function LinkedIn(props) {
+  // filled mark reads better at small sizes than a stroke outline
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
+      <path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0zM.5 8h4V24h-4V8zm7.5 0h3.8v2.2h.05c.53-1 1.83-2.2 3.77-2.2 4.03 0 4.78 2.65 4.78 6.1V24h-4v-7.1c0-1.7-.03-3.9-2.38-3.9-2.38 0-2.75 1.86-2.75 3.78V24H8V8z" />
+    </svg>
+  );
+}
+
 export function ExternalLink(props) {
   return (
     <svg {...base} {...props}>

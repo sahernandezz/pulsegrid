@@ -1,5 +1,8 @@
 # PulseGrid
 
+> ### 🔗 Live showcase → **[pulsegrid.web.app](https://pulsegrid.web.app)**
+> Interactive consolidated results — the refined dark dashboard that reads `consolidated-results.json` (filterable matrix, scaling curves, per-variant detail · EN/ES).
+
 **Today, with Spring Boot 4 / Java 25, Virtual Threads and GraalVM native compilation
 all available — which concurrency paradigm is the right choice for a high-concurrency
 ingestion service, and why?** PulseGrid answers that with **real, reproducible
@@ -104,6 +107,9 @@ python analyze.py            # -> plots/output/*.png + article-kit/*
 ```
 
 ### Frontend (showcase)
+
+Deployed live at **https://pulsegrid.web.app** (Firebase Hosting). To run it locally:
+
 ```bash
 cd frontend && npm install && npm run dev      # reads ../consolidated-results.json
 npm run build                                  # static site in dist/
@@ -168,6 +174,14 @@ for overload). Every number stays auditable against the code that produced it.
 **illustrative sample data** (`"sample": true`); the frontend renders it with a warning
 banner. It is replaced by real measurements when the runner is run.
 
+## Author
+
+**Sergio Alejandro Hernandez Zambrano** — *Sergio Hernandez* · Backend Software Engineer (Bogotá, Colombia).
+
+- 🌐 Portfolio — [sahernandezz.web.app](https://sahernandezz.web.app)
+- 💼 LinkedIn — [in/sergio-alejandro-hernandez-zambrano](https://www.linkedin.com/in/sergio-alejandro-hernandez-zambrano)
+- 🐙 GitHub — [@sahernandezz](https://github.com/sahernandezz)
+
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT © Sergio Alejandro Hernandez Zambrano — see [LICENSE](LICENSE).

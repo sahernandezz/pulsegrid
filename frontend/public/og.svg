@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" font-family="'Inter','Segoe UI',sans-serif">
+  <rect width="1200" height="630" fill="#0a0c10"/>
+  <rect width="1200" height="630" fill="url(#g)"/>
+  <defs>
+    <radialGradient id="g" cx="18%" cy="0%" r="90%">
+      <stop offset="0%" stop-color="#0f2a27"/>
+      <stop offset="55%" stop-color="#0a0c10"/>
+      <stop offset="100%" stop-color="#0a0c10"/>
+    </radialGradient>
+  </defs>
+
+  <!-- brand mark -->
+  <g transform="translate(96,96)">
+    <rect width="64" height="64" rx="14" fill="#0f131a" stroke="#212833" stroke-width="1.5"/>
+    <g transform="translate(8,8) scale(2)">
+      <path d="M3 13h4l2-6 3 12 2.5-9 1.5 3H21" fill="none" stroke="#2dd4bf" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <text x="84" y="42" fill="#e6e9ef" font-size="30" font-weight="600" letter-spacing="-0.5">PulseGrid</text>
+  </g>
+
+  <!-- headline -->
+  <text x="96" y="300" fill="#e6e9ef" font-size="68" font-weight="700" letter-spacing="-1.5">Concurrency paradigms,</text>
+  <text x="96" y="378" fill="#2dd4bf" font-size="68" font-weight="700" letter-spacing="-1.5">measured.</text>
+
+  <!-- subline -->
+  <text x="98" y="452" fill="#9aa4b4" font-size="28" font-weight="400">Spring Boot 4 · Quarkus · Virtual Threads · WebFlux · Mutiny</text>
+  <text x="98" y="492" fill="#9aa4b4" font-size="28" font-weight="400">across JVM and GraalVM native — real, reproducible benchmarks.</text>
+
+  <!-- footer chips -->
+  <g transform="translate(98,548)" font-size="22" font-family="'IBM Plex Mono',monospace" fill="#6a7488">
+    <text x="0" y="20">identical resource limits</text>
+    <text x="320" y="20" fill="#212833">·</text>
+    <text x="344" y="20">≥3 runs · median ± σ</text>
+    <text x="650" y="20" fill="#212833">·</text>
+    <text x="674" y="20">offline-measured</text>
+  </g>
+</svg>
